@@ -4,7 +4,6 @@
 .header-container {
   position: relative;
   width: 100%;
-  max-width: 815px;
   height: 60px;
   flex-shrink: 0;
   overflow: hidden;
