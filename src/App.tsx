@@ -1,10 +1,11 @@
+import SignIn from './assets/components/login/SignIn'
 import './styles/global.css'
-import Header from './assets/components/Common/Header'
+
 
 function App() {
   return (
     <>
-      <Header />
+    <SignIn />
     </>
   )
 }
