@@ -1,0 +1,718 @@
+.babyPulseSigninPage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #FFF;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.decorativeElements {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.tealBackground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 704px;
+  height: 754px;
+  background: #009BB7;
+  z-index: 1;
+}
+
+.decorativeDots {
+  position: absolute;
+  z-index: 2;
+}
+
+.dot {
+  position: absolute;
+  width: 17px;
+  height: 13px;
+  background: #D9D9D9;
+  border-radius: 50%;
+}
+
+.dot1 { left: 43px; top: 5px; }
+.dot2 { left: 4px; top: 4px; }
+.dot3 { left: 43px; top: 43px; }
+.dot4 { left: 4px; top: 40px; }
+.dot5 { left: 87px; top: 73px; }
+.dot6 { left: 85px; top: 40px; }
+
+.coloredShapes {
+  position: absolute;
+  z-index: 2;
+}
+
+.shape {
+  position: absolute;
+}
+
+.shapePink {
+  left: 21px;
+  top: 606px;
+  width: 65px;
+  height: 65px;
+  background: #F845D7;
+}
+
+.shapeBlue {
+  left: 30px;
+  top: 618px;
+  width: 45px;
+  height: 41px;
+  background: #009BB7;
+}
+
+.shapePurple {
+  left: 639px;
+  top: 664px;
+  width: 43px;
+  height: 42px;
+  background: #511579;
+}
+
+.shapeGreen {
+  left: 649px;
+  top: 670px;
+  width: 22px;
+  height: 29px;
+  background: #25B700;
+}
+
+.shapeRed {
+  left: 585px;
+  top: 14px;
+  width: 80px;
+  height: 81px;
+  background: #F90E0E;
+}
+
+.shapeCyan {
+  left: 599px;
+  top: 26px;
+  width: 53px;
+  height: 60px;
+  background: #58D9F0;
+}
+
+.babyImage {
+  position: absolute;
+  left: 464px;
+  top: -5px;
+  width: 1153px;
+  height: 769px;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.formContainer {
+  position: absolute;
+  left: 64px;
+  top: 98px;
+  width: 568px;
+  height: 532px;
+  z-index: 3;
+}
+
+.formBackground {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #A0DFDF;
+  border-radius: 35px;
+}
+
+.formContent {
+  position: absolute;
+  left: 22px;
+  top: 25px;
+  width: 522px;
+  height: 483px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 237, 250, 0.90) 100%);
+  border-radius: 27px;
+  padding: 70px 70px 40px;
+  box-sizing: border-box;
+}
+
+.signinTitle {
+  color: #000;
+  text-align: center;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0 0 70px 0;
+}
+
+.signinForm {
+  width: 100%;
+}
+
+.inputGroup {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.inputLabel {
+  color: #000;
+  font-family: Arial, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 6px 27px;
+  display: block;
+}
+
+.formInput {
+  width: 100%;
+  height: 50px;
+  background: #FFF;
+  border: 1px solid #B8C6FF;
+  border-radius: 25px;
+  padding: 0 27px;
+  color: #666;
+  font-family: Arial, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.formInput:focus {
+  border-color: #213FD5;
+  box-shadow: 0 0 0 3px rgba(33, 63, 213, 0.1);
+}
+
+.formInput::placeholder {
+  color: #666;
+}
+
+.inputError {
+  border-color: #e53e3e !important;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1) !important;
+}
+
+.errorMessage {
+  color: #e53e3e;
+  font-family: Arial, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 4px;
+  margin-left: 27px;
+  display: block;
+  line-height: 1.3;
+}
+
+.formOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 34px 0 27px 0;
+  font-family: Arial, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.rememberGroup {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.checkboxContainer {
+  position: relative;
+  width: 25px;
+  height: 20px;
+}
+
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkboxCustom {
+  width: 25px;
+  height: 20px;
+  background: #213FD5;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.checkmark {
+  width: 22px;
+  height: 13px;
+}
+
+.rememberLabel {
+  color: #000;
+  cursor: pointer;
+  margin: 0;
+  user-select: none;
+}
+
+.forgotLink {
+  color: #000;
+  text-decoration: underline;
+  font-family: Arial, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.submitButton {
+  width: 100%;
+  height: 39px;
+  background: linear-gradient(180deg, #213FD5 0%, #BE5985 100%);
+  border: none;
+  border-radius: 19.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(33, 63, 213, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.submitButton:disabled,
+.submitting {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.submitting {
+  background: linear-gradient(180deg, #888 0%, #666 100%);
+}
+
+.buttonText {
+  color: #FFF;
+  font-family: Arial, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.signupLinkContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+  font-family: Arial, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.signupText {
+  color: #666;
+}
+
+.signupLink {
+  color: #213FD5;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.signupLink:hover {
+  opacity: 0.8;
+}
+
+/* Touch-friendly improvements */
+.formInput,
+.submitButton,
+.checkboxContainer,
+.rememberLabel,
+.forgotLink,
+.signupLink {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.formInput {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Prevent zoom on iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .formInput {
+    font-size: 16px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1441px) {
+  .babyPulseSigninPage {
+    justify-content: flex-start;
+    padding-left: 10%;
+  }
+  
+  .formContainer {
+    left: 5%;
+    width: 600px;
+    height: 550px;
+  }
+  
+  .formContent {
+    width: 100%;
+    padding: 80px 80px 50px;
+  }
+}
+
+/* Standard desktop */
+@media (max-width: 1440px) and (min-width: 1200px) {
+  .babyPulseSigninPage {
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+  
+  .formContainer {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+/* Small desktop/large tablet */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .babyImage {
+    width: 800px;
+    height: 600px;
+    left: 400px;
+  }
+  
+  .formContainer {
+    width: 450px;
+    height: 480px;
+    left: 50px;
+  }
+  
+  .formContent {
+    padding: 50px 50px 30px;
+  }
+}
+
+/* Tablet landscape */
+@media (max-width: 991px) and (min-width: 769px) {
+  .babyImage {
+    width: 600px;
+    height: 500px;
+    left: 350px;
+    opacity: 0.7;
+  }
+  
+  .formContainer {
+    width: 420px;
+    height: 450px;
+    left: 40px;
+  }
+  
+  .formContent {
+    padding: 40px 40px 25px;
+  }
+  
+  .signinTitle {
+    font-size: 22px;
+    margin-bottom: 50px;
+  }
+}
+
+/* Tablet portrait and mobile landscape */
+@media (max-width: 768px) {
+  .babyPulseSigninPage {
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tealBackground {
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+  }
+
+  .babyImage {
+    display: none;
+  }
+
+  .coloredShapes,
+  .decorativeDots {
+    opacity: 0.3;
+  }
+
+  .formContainer {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    margin: 0 auto;
+  }
+  
+  .formBackground {
+    border-radius: 25px;
+  }
+
+  .formContent {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding: 40px 30px;
+    border-radius: 20px;
+  }
+
+  .signinTitle {
+    margin-bottom: 35px;
+    font-size: 22px;
+  }
+
+  .inputGroup {
+    margin-bottom: 25px;
+  }
+  
+  .inputLabel {
+    margin-left: 20px;
+    font-size: 13px;
+  }
+  
+  .formInput {
+    height: 52px;
+    padding: 0 20px;
+    font-size: 16px;
+    border-radius: 26px;
+  }
+  
+  .errorMessage {
+    margin-left: 20px;
+    font-size: 12px;
+  }
+
+  .formOptions {
+    margin: 25px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .rememberGroup {
+    gap: 12px;
+  }
+  
+  .checkboxContainer {
+    width: 28px;
+    height: 22px;
+  }
+  
+  .checkboxCustom {
+    width: 28px;
+    height: 22px;
+  }
+  
+  .submitButton {
+    height: 48px;
+    margin-top: 20px;
+    border-radius: 24px;
+  }
+  
+  .buttonText {
+    font-size: 17px;
+  }
+
+  .signupLinkContainer {
+    margin-top: 25px;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 15px;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  .babyPulseSigninPage {
+    padding: 15px;
+  }
+  
+  .formContainer {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .formContent {
+    padding: 35px 25px;
+  }
+
+  .signinTitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .inputGroup {
+    margin-bottom: 20px;
+  }
+
+  .formInput {
+    height: 50px;
+    padding: 0 18px;
+    font-size: 16px;
+  }
+
+  .inputLabel {
+    font-size: 12px;
+    margin-left: 18px;
+  }
+  
+  .errorMessage {
+    margin-left: 18px;
+    font-size: 11px;
+  }
+  
+  .formOptions {
+    margin: 20px 0;
+    gap: 12px;
+  }
+  
+  .checkboxContainer {
+    width: 26px;
+    height: 20px;
+  }
+  
+  .checkboxCustom {
+    width: 26px;
+    height: 20px;
+  }
+
+  .submitButton {
+    height: 50px;
+  }
+
+  .buttonText {
+    font-size: 16px;
+  }
+  
+  .signupLinkContainer {
+    font-size: 14px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .babyPulseSigninPage {
+    padding: 10px;
+  }
+  
+  .formContainer {
+    max-width: 340px;
+  }
+  
+  .formContent {
+    padding: 30px 20px;
+  }
+  
+  .signinTitle {
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+  
+  .formInput {
+    height: 48px;
+    padding: 0 16px;
+  }
+  
+  .inputLabel {
+    margin-left: 16px;
+  }
+  
+  .errorMessage {
+    margin-left: 16px;
+    font-size: 10px;
+  }
+  
+  .submitButton {
+    height: 48px;
+  }
+  
+  .buttonText {
+    font-size: 15px;
+  }
+  
+  .signupLinkContainer {
+    font-size: 13px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .babyPulseSigninPage {
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  .formContainer {
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .formContent {
+    padding: 25px 30px;
+  }
+  
+  .signinTitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup {
+    margin-bottom: 15px;
+  }
+  
+  .formOptions {
+    margin: 15px 0;
+  }
+  
+  .submitButton {
+    height: 44px;
+    margin-top: 15px;
+  }
+  
+  .signupLinkContainer {
+    margin-top: 15px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .checkboxCustom,
+  .submitButton {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}

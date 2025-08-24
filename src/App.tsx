@@ -4,6 +4,7 @@ import SignIn from './assets/components/login/SignIn';
 import SignUp from './assets/components/login/SignUp';
 import Welcome from './assets/components/Welcome';
 import HomePage from './assets/components/HomePage';
+import AAA from './assets/components/AAA';
 import './styles/global.css';
 //import ExpertsSlide from './assets/components/carousel/slides/ExpertsSlide';
 
@@ -13,10 +14,11 @@ function App() {
       <div className="app">
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<AAA />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/aaa" element={<AAA />} />
         </Routes>
       </div>
     </Router>
