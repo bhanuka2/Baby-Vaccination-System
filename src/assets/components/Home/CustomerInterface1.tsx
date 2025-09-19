@@ -7,17 +7,17 @@ const FlowbiteCarousel = () => {
 
   const images = [
     {
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      src: "src/assets/img/img1.png",
       alt: "Mountain landscape with lake reflection",
       title: "Serene Mountain Lake"
     },
     {
-      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
+      src: "src/assets/img/img2.png",
       alt: "Forest path with sunlight filtering through trees",
       title: "Enchanted Forest Path"
     },
     {
-      src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80",
+      src: "src/assets/img/img3.png",
       alt: "Ocean waves crashing on rocky shore",
       title: "Ocean Shore Sunset"
     }
