@@ -108,7 +108,13 @@ const Login = () => {
               <a href="#" className="forgot-password" onClick={handleForgotPassword}>Forgot Password ?</a>
             </div>
 
-            <button type="submit" className="login-button" disabled={isLoading} style={{marginTop: '30px',width: '500px'}}>
+            <button 
+              type="submit" 
+              className="login-button" 
+              disabled={isLoading} 
+              style={{marginTop: '30px',width: '500px'}}
+              onClick={() => navigate('/customer-interface')}
+            >
               {isLoading ? 'Signing in...' : 'Log in'}
             </button>
           </form>
