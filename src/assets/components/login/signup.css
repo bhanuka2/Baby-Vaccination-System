@@ -38,7 +38,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 620px;
-  height: 700px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,7 +129,7 @@
   margin-bottom: 50px;
   text-align: center;
   width: 493px;
-  font: 700 32px Inter, sans-serif;
+  font: 600 25px Inter, sans-serif;
 }
 
 @media (max-width: 991px) {
@@ -172,8 +172,8 @@
   outline: none;
   padding: 0 36px;
   color: rgba(0, 0, 0, 0.46);
-  background-color: #FFF;
-  font: 400 20px Inter, sans-serif;
+  background-color: #ffffff;
+  font: 400 18px Inter, sans-serif;
 }
 
 @media (max-width: 991px) {
@@ -288,6 +288,7 @@
   .login-text,
   .login-link-text {
     font-size: 13px;
+    color: #000;
   }
 }
 

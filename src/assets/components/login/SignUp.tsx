@@ -13,6 +13,7 @@ const Signup = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -52,13 +53,13 @@ const Signup = () => {
       <div className="form-card-container">
         <div className="background-layer-1" />
         <div className="background-layer-2" />
-        
-        <h1 className="form-title"style={{marginBottom:"10px"}} >
+
+        <h3 className="form-title" style={{ marginBottom: "13px" }}>
           Create Your Baby Care Account
-        </h1>
+        </h3>
         
         <form onSubmit={handleSubmit}>
-          <div className="input-group" style={{height: '60px'}}>
+          <div className="input-group" style={{ height: '45px', backgroundColor: 'white', borderRadius: '15px' }}>
             <input
               type="text"
               placeholder="Full name"
@@ -70,7 +71,7 @@ const Signup = () => {
             />
           </div>
           
-          <div className="input-group" style={{height: '60px'}}>
+          <div className="input-group" style={{height: '45px', backgroundColor: 'white',borderRadius: '15px'}}>
             <input
               type="text"
               placeholder="NIC number"
@@ -81,7 +82,7 @@ const Signup = () => {
             />
           </div>
           
-          <div className="input-group" style={{height: '60px'}}>
+          <div className="input-group" style={{height: '45px',backgroundColor: 'white',borderRadius: '15px'}}>
             <input
               type="email"
               placeholder="Email address"
@@ -93,7 +94,7 @@ const Signup = () => {
             />
           </div>
           
-          <div className="input-group" style={{height: '60px'}}>
+          <div className="input-group" style={{height: '45px',backgroundColor: 'white',borderRadius: '15px'}}>
             <input
               type="tel"
               placeholder="Phone number"
@@ -105,7 +106,7 @@ const Signup = () => {
             />
           </div>
           
-          <div className="input-group" style={{height: '60px'}}>
+          <div className="input-group" style={{height: '45px',backgroundColor: 'white',borderRadius: '15px'}}>
             <input
               type="password"
               placeholder="Password"
@@ -117,7 +118,7 @@ const Signup = () => {
             />
           </div>
           
-          <div className="input-group" style={{height: '60px'}}>
+          <div className="input-group" style={{height: '45px',backgroundColor: 'white',borderRadius: '15px'}}>
             <input
               type="password"
               placeholder="Repeat password"
@@ -136,7 +137,7 @@ const Signup = () => {
           </button>
           
           <div className="login-link" style={{ marginTop: '30px' }}>
-            <span className="login-text">Already have an account?</span>
+            <span className="login-text" style={{ color: 'black' }}>Already have an account?</span>
             <button 
               type="button" 
               className="login-link-text login-link-button"

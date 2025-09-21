@@ -1150,6 +1150,413 @@ html {
   }
 }
 
+/* AD1 Dashboard Component Styles */
+.ad1-container {
+  max-width: 910px;
+}
+
+.ad1-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 680px;
+  width: 100%;
+  align-items: flex-start;
+  padding: 90px 0 8px 30px;
+}
+
+.ad1-background-image {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ad1-stats-section {
+  position: relative;
+  width: 100%;
+  max-width: 781px;
+}
+
+.ad1-stats-grid {
+  gap: 20px;
+  display: flex;
+}
+
+.ad1-stat-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  aspect-ratio: 1.792;
+  width: 181px;
+  flex-grow: 1;
+  align-items: flex-start;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  padding: 25px 20px;
+}
+
+.ad1-stat-background {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ad1-stat-number {
+  position: relative;
+  color: rgba(51, 51, 51, 1);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.ad1-stat-title {
+  position: relative;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ad1-stat-active {
+  color: rgba(255, 107, 107, 1);
+}
+
+.ad1-stat-reports {
+  color: rgba(255, 184, 77, 1);
+}
+
+.ad1-stat-subtitle {
+  position: relative;
+  color: rgba(102, 102, 102, 1);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.ad1-stat-description {
+  margin-top: 35px;
+}
+
+.ad1-section-title {
+  position: relative;
+  color: rgba(51, 51, 51, 1);
+  margin-top: 31px;
+  font: 700 18px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.ad1-analytics-section {
+  position: relative;
+  align-self: stretch;
+  margin-top: 16px;
+}
+
+.ad1-analytics-grid {
+  gap: 20px;
+  display: flex;
+}
+
+.ad1-chart-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  aspect-ratio: 1.995;
+  width: 50%;
+  align-items: flex-start;
+  padding: 7px 80px 14px 20px;
+}
+
+.ad1-chart-background {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ad1-chart-title {
+  position: relative;
+  color: rgba(51, 51, 51, 1);
+  font: 700 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.ad1-chart-bars {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin: 6px 0 0 20px;
+}
+
+.ad1-bar {
+  background-color: rgba(108, 99, 255, 1);
+  display: flex;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.ad1-bar-1 {
+  align-self: flex-end;
+  margin-top: 60px;
+  height: 80px;
+}
+
+.ad1-bar-2 {
+  align-self: flex-end;
+  margin-top: 40px;
+  height: 100px;
+}
+
+.ad1-bar-3 {
+  align-self: flex-end;
+  margin-top: 30px;
+  height: 110px;
+}
+
+.ad1-bar-4 {
+  align-self: flex-start;
+  margin-top: 20px;
+  height: 120px;
+}
+
+.ad1-bar-5 {
+  align-self: flex-start;
+  margin-top: 10px;
+  height: 130px;
+}
+
+.ad1-bar-6 {
+  height: 140px;
+}
+
+.ad1-chart-labels {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 11px;
+  color: rgba(102, 102, 102, 1);
+  white-space: nowrap;
+  text-align: center;
+  margin: 5px 0 0 21px;
+  font: 400 10px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.ad1-label {
+  flex-grow: 1;
+}
+
+.ad1-table-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 201px;
+  width: 50%;
+  align-items: flex-start;
+  padding: 9px 20px 33px;
+  font: 700 12px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.ad1-table-background {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ad1-table-title {
+  position: relative;
+  color: rgba(51, 51, 51, 1);
+  font-size: 14px;
+}
+
+.ad1-table-header {
+  position: relative;
+  background-color: rgba(248, 249, 250, 1);
+  align-self: stretch;
+  display: flex;
+  margin-top: 19px;
+  width: 100%;
+  align-items: stretch;
+  gap: 20px;
+  color: rgba(51, 51, 51, 1);
+  white-space: nowrap;
+  justify-content: space-between;
+  padding: 8px 53px 8px 10px;
+}
+
+.ad1-header-group {
+  display: flex;
+  align-items: stretch;
+  gap: 21px;
+}
+
+.ad1-table-body {
+  position: relative;
+  display: flex;
+  margin-left: 10px;
+  width: 356px;
+  max-width: 100%;
+  flex-direction: column;
+  font-weight: 400;
+}
+
+.ad1-table-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.ad1-table-row:first-child {
+  margin-top: 0;
+}
+
+.ad1-division-name {
+  color: rgba(51, 51, 51, 1);
+}
+
+.ad1-table-stats {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  white-space: nowrap;
+}
+
+.ad1-registration-count {
+  color: rgba(51, 51, 51, 1);
+}
+
+.ad1-coverage-percentage {
+  color: rgba(40, 167, 69, 1);
+}
+
+.ad1-coverage-medium {
+  color: rgba(255, 184, 77, 1);
+}
+
+.ad1-activities-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-self: stretch;
+  min-height: 111px;
+  margin-top: 16px;
+  align-items: flex-start;
+  color: rgba(51, 51, 51, 1);
+  padding: 13px 80px 23px 20px;
+  font: 400 12px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.ad1-activities-background {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ad1-activity-item {
+  position: relative;
+  margin-top: 5px;
+}
+
+.ad1-activity-item:first-child {
+  margin-top: 0;
+}
+
+.ad1-footer {
+  position: relative;
+  color: rgba(102, 102, 102, 1);
+  text-align: center;
+  margin: 29px 0 0 190px;
+  font: 400 10px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+/* Responsive styles for AD1 */
+@media (max-width: 991px) {
+  .ad1-main-wrapper {
+    max-width: 100%;
+    padding-left: 20px;
+  }
+
+  .ad1-stats-section {
+    max-width: 100%;
+  }
+
+  .ad1-stats-grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+
+  .ad1-stat-card {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 19px;
+  }
+
+  .ad1-stat-card:first-child {
+    margin-top: 0;
+  }
+
+  .ad1-analytics-grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+
+  .ad1-chart-container {
+    width: 100%;
+    margin-top: 19px;
+    padding-right: 20px;
+  }
+
+  .ad1-chart-container:first-child {
+    margin-top: 0;
+  }
+
+  .ad1-chart-bars {
+    margin-left: 10px;
+  }
+
+  .ad1-chart-labels {
+    margin-left: 10px;
+    white-space: initial;
+  }
+
+  .ad1-bar-1 {
+    margin-top: 40px;
+  }
+
+  .ad1-table-container {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 19px;
+  }
+
+  .ad1-table-header {
+    padding-right: 20px;
+    white-space: initial;
+  }
+
+  .ad1-table-stats {
+    white-space: initial;
+  }
+
+  .ad1-activities-container {
+    max-width: 100%;
+    padding-right: 20px;
+  }
+
+  .ad1-footer {
+    margin-left: 10px;
+  }
+}
+
 /* Landscape orientation on mobile */
 @media (max-height: 500px) and (orientation: landscape) {
   .signup-page {
@@ -1196,6 +1603,48 @@ html {
   .signup-input-background svg {
     shape-rendering: geometricPrecision;
   }
+}
+
+/* AdminDashboard Styles */
+.admin-sidebar-container {
+  max-width: 250px;
+  color: rgba(102, 102, 102, 1);
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.admin-sidebar-wrapper {
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 87px 50px 474px 25px;
+  border: 1px solid rgba(229, 229, 229, 1);
+}
+
+.admin-nav-item {
+  margin-top: 18px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.admin-nav-item:first-child {
+  margin-top: 0;
+}
+
+.admin-nav-item:hover {
+  opacity: 0.8;
+}
+
+.admin-nav-active {
+  color: rgba(108, 99, 255, 1);
+  font-weight: 700;
+}
+
+.admin-nav-item:nth-child(5) {
+  margin-bottom: -95px;
 }
 
 /* Welcome Page Styles - Mobile-First Responsive Design */
