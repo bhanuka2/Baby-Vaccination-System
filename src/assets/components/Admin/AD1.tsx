@@ -2,8 +2,8 @@ import * as React from "react";
 
 function AD1() {
   return (
-    <div className="ad1-container">
-      <div className="ad1-main-wrapper">
+    <div className="ad1-container" style={{marginTop: '-700px' , marginLeft: '250px'}}>
+      <div className="ad1-main-wrapper" style={{ width: '1090px'}}>
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/29df5f152227603580ea098dc2250850a04796cf?placeholderIfAbsent=true"
           alt="Dashboard background"

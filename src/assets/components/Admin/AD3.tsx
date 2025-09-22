@@ -31,7 +31,7 @@ function AD3() {
   };
 
   return (
-    <div className="vaccination-programs-container">
+    <div className="vaccination-programs-container" style={{marginTop: '-700px' , marginLeft: '250px'}}>
       <div className="vaccination-programs-main">
         <h1 className="vaccination-programs-title">Vaccination Programs</h1>
         
@@ -180,7 +180,7 @@ function AD3() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style >{`
         .vaccination-programs-container {
           width: 942px;
           height: 522px;

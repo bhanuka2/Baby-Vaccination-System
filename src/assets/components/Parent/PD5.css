@@ -1,0 +1,468 @@
+/* PD5 Symptom Report Component Styles */
+.symptom-report-container {
+  width: 100%;
+  max-width: 1030px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.symptom-report-content {
+  width: 100%;
+}
+
+/* Header */
+.report-header {
+  margin-bottom: 40px;
+}
+
+.report-title {
+  color: #111827;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.report-subtitle {
+  color: #6B7280;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 32px;
+}
+
+.form-label {
+  display: block;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.error-text {
+  color: #EF4444;
+  font-size: 11px;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+/* Dropdown Styles */
+.dropdown-container {
+  position: relative;
+  width: 371px;
+}
+
+.dropdown-trigger {
+  width: 100%;
+  height: 38px;
+  background: white;
+  border: 2px solid #06B6D4;
+  border-radius: 8px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.dropdown-trigger.error {
+  border-color: #EF4444;
+}
+
+.dropdown-trigger:hover {
+  border-color: #0891B2;
+}
+
+.dropdown-value {
+  color: #6B7280;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.dropdown-value.selected {
+  color: #06B6D4;
+}
+
+.dropdown-arrow {
+  color: #06B6D4;
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 12px 20px;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #F9FAFB;
+}
+
+.dropdown-item.add-baby {
+  color: #9CA3AF;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #E5E7EB;
+}
+
+/* Symptom Categories Grid */
+.symptom-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 159px);
+  grid-template-rows: repeat(2, 43px);
+  gap: 13px;
+}
+
+.category-button {
+  position: relative;
+  width: 159px;
+  height: 43px;
+  background: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 25px;
+  color: #6B7280;
+  font-size: 11px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-button:hover {
+  border-color: #06B6D4;
+  transform: translateY(-1px);
+}
+
+.category-button.selected {
+  border-color: #06B6D4;
+  box-shadow: 0 0 0 1px #06B6D4;
+}
+
+.category-button.fever.selected {
+  background-color: #FEE2E2;
+  border-color: #EF4444;
+  color: #EF4444;
+  box-shadow: 0 0 0 1px #EF4444;
+}
+
+/* Fever Fields */
+.fever-section {
+  background-color: #FEF7F0;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #F59E0B;
+}
+
+.fever-fields-grid {
+  display: flex;
+  gap: 40px;
+}
+
+.fever-field {
+  flex: 1;
+}
+
+.form-input {
+  width: 100%;
+  height: 35px;
+  background: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  padding: 0 13px;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 400;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #06B6D4;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+.form-input.error {
+  border-color: #EF4444;
+}
+
+.form-input::placeholder {
+  color: #9CA3AF;
+}
+
+.temperature-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.temperature-input {
+  color: #EF4444;
+  font-weight: 500;
+}
+
+.temperature-unit {
+  position: absolute;
+  right: 13px;
+  color: #6B7280;
+  font-size: 11px;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+/* Additional Symptoms */
+.additional-symptoms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 11px 0;
+}
+
+.symptom-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 16px;
+  background: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox.checked {
+  background-color: #06B6D4;
+  border-color: #06B6D4;
+}
+
+.checkmark {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.checkbox-label {
+  color: #6B7280;
+  font-size: 11px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.symptom-checkbox-container:has(.custom-checkbox.checked) .checkbox-label {
+  color: #374151;
+}
+
+/* Form Textarea */
+.form-textarea {
+  width: 100%;
+  min-height: 65px;
+  background: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #6B7280;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #06B6D4;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+.form-textarea::placeholder {
+  color: #9CA3AF;
+}
+
+/* Action Buttons */
+.action-buttons-container {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+.action-button {
+  width: 117px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.action-button.call-doctor {
+  background-color: #F59E0B;
+}
+
+.action-button.call-doctor:hover {
+  background-color: #D97706;
+  transform: translateY(-1px);
+}
+
+.action-button.report-now {
+  background-color: #EF4444;
+}
+
+.action-button.report-now:hover {
+  background-color: #DC2626;
+  transform: translateY(-1px);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .symptom-report-container {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .dropdown-container {
+    width: 100%;
+  }
+
+  .symptom-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .category-button {
+    width: 100%;
+  }
+
+  .fever-fields-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .additional-symptoms-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .action-buttons-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .action-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .symptom-report-container {
+    padding: 12px;
+  }
+
+  .report-title {
+    font-size: 16px;
+  }
+
+  .report-subtitle {
+    font-size: 11px;
+  }
+
+  .symptom-categories-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .additional-symptoms-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .action-buttons-container {
+    gap: 8px;
+  }
+
+  .fever-section {
+    padding: 16px;
+  }
+
+  .form-section {
+    margin-bottom: 24px;
+  }
+}
+
+/* Focus and accessibility improvements */
+.dropdown-trigger:focus-visible,
+.category-button:focus-visible,
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.custom-checkbox:focus-visible,
+.action-button:focus-visible {
+  outline: 2px solid #06B6D4;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Error states */
+.form-input.error:focus {
+  border-color: #EF4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Loading states */
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.action-button:disabled:hover {
+  transform: none;
+}

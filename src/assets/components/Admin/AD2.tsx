@@ -2,8 +2,8 @@ import * as React from "react";
 
 function AD2() {
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-header">
+    <div className="dashboard-container" style={{marginTop: '-753px' , marginLeft: '225px', width: '100%', maxWidth: '1090px', padding: '20px', fontFamily: 'Inter, sans-serif', backgroundColor: '#fff'}}>
+      <div className="dashboard-header" >
         <h1 className="dashboard-title">PHM / MOH Dashboard</h1>
         <p className="dashboard-description">
           Manage patient records and respond to health emergencies
@@ -138,7 +138,7 @@ function AD2() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style >{`
         .dashboard-container {
           width: 100%;
           max-width: 860px;

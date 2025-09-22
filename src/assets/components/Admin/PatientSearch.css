@@ -1,0 +1,508 @@
+/* Patient Search Component Styles */
+.patient-search-container {
+  width: 100%;
+  min-height: 864px;
+  padding: 111px 78px 0 78px;
+  box-sizing: border-box;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  background-color: #F0F9FF;
+  margin: 0 auto;
+}
+
+.patient-search-title {
+  color: #111827;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  margin-top: -60px;
+}
+
+.search-input-container {
+  width: 481px;
+  height: 110px;
+  position: relative;
+  margin-bottom: -35px;
+}
+
+.search-input {
+  width: 100%;
+  height: 36px;
+  background: white;
+  border: 2px solid #06B6D4;
+  border-radius: 8px;
+  padding: 0 15px;
+  color: #06B6D4;
+  box-sizing: border-box;
+  outline: none;
+  font: 12px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.search-input::placeholder {
+  color: #06B6D4;
+}
+
+.section-title {
+  color: #374151;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 26px;
+}
+
+.vaccine-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 215px);
+  grid-template-rows: repeat(2, 49px);
+  gap: 10px 0px;
+  margin-bottom: 16px;
+}
+
+.vaccine-button {
+  position: relative;
+  width: 200px;
+  height: 49px;
+  cursor: pointer;
+  border-radius: 25px;
+  border: 1px solid #D1D5DB;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.vaccine-button.given {
+  background-color: rgba(27, 242, 59, 0.73);
+  border: 2px solid #6CEF44;
+}
+
+.vaccine-button.given.selected {
+  background-color: rgba(27, 242, 59, 0.76);
+  border: 1px solid #D1D5DB;
+}
+
+.vaccine-button.selected:not(.given) {
+  background-color: rgba(227, 25, 25, 0.69);
+  border: 1px solid #D1D5DB;
+}
+
+.vaccine-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vaccine-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  white-space: nowrap;
+  font: 400 11px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  color: #6B7280;
+}
+
+.vaccine-button.given .vaccine-text {
+  color: hwb(131 15% 56%);
+}
+
+.vaccine-button.given.selected .vaccine-text {
+  color: #1A581C;
+}
+
+.vaccine-button.given:nth-child(3) .vaccine-text {
+  color: #24622B;
+}
+
+.vaccine-button.given:nth-child(1) .vaccine-text {
+  color: #296133;
+}
+
+.vaccine-button.given:nth-child(2) .vaccine-text {
+  color: #1E612A;
+}
+
+.side-effects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 31px 50px;
+  max-width: 756px;
+}
+
+.checkbox-container {
+  position: relative;
+  width: 30px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  background-color: white;
+  border: 1px solid #D1D5DB;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.checkbox-container.checked {
+  background-color: #06B6D4;
+  border: 1px solid #06B6D4;
+}
+
+.checkbox-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-label {
+  margin-top: 1px;
+  color: #6B7280;
+  font: 400 11px/16px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.checkbox-label.checked {
+  color: #374151;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .patient-search-container {
+    padding: 60px 40px 0 40px;
+  }
+
+  .vaccine-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .vaccine-button {
+    width: 100%;
+    min-height: 50px;
+  }
+
+  .side-effects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px;
+  }
+
+  .patient-search-title {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .patient-search-container {
+    padding: 40px 25px 0 25px;
+    min-height: auto;
+  }
+
+  .patient-search-title {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .search-input-container {
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  .search-input {
+    height: 44px;
+    font-size: 14px;
+    padding: 0 20px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .vaccine-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .vaccine-button {
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+  }
+
+  .vaccine-text {
+    font-size: 13px;
+  }
+
+  .side-effects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .side-effects-grid > div {
+    gap: 20px;
+    align-items: center;
+  }
+
+  .checkbox-container {
+    width: 35px;
+    height: 20px;
+    min-width: 35px;
+    min-height: 20px;
+  }
+
+  .checkbox-label {
+    font-size: 13px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .patient-search-container {
+    padding: 30px 20px 40px 20px;
+  }
+
+  .patient-search-title {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  .search-input-container {
+    margin-bottom: 25px;
+  }
+
+  .search-input {
+    height: 48px;
+    font-size: 16px;
+    border-width: 2px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+
+  .vaccine-grid {
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .vaccine-button {
+    height: 52px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .vaccine-text {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .side-effects-grid {
+    gap: 18px;
+    margin-bottom: 30px;
+  }
+
+  .checkbox-container {
+    width: 40px;
+    height: 22px;
+    border-radius: 12px;
+  }
+
+  .checkbox-label {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .patient-search-container {
+    padding: 20px 16px 30px 16px;
+  }
+
+  .patient-search-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .search-input-container {
+    margin-bottom: 20px;
+  }
+
+  .search-input {
+    height: 50px;
+    font-size: 16px;
+    padding: 0 18px;
+    border-radius: 10px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .vaccine-grid {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .vaccine-button {
+    height: 54px;
+    border-radius: 14px;
+    border-width: 2px;
+  }
+
+  .vaccine-text {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .side-effects-grid {
+    gap: 16px;
+    margin-bottom: 25px;
+  }
+
+  .side-effects-grid > div {
+    gap: 16px;
+    padding: 8px 0;
+  }
+
+  .checkbox-container {
+    width: 42px;
+    height: 24px;
+    border-radius: 14px;
+    border-width: 2px;
+  }
+
+  .checkbox-label {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 500;
+  }
+
+  .checkbox-check {
+    width: 14px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .patient-search-container {
+    padding: 16px 12px 25px 12px;
+  }
+
+  .vaccine-button {
+    height: 56px;
+    padding: 0 8px;
+  }
+
+  .vaccine-text {
+    font-size: 12px;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .side-effects-grid > div {
+    gap: 14px;
+  }
+
+  .checkbox-label {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+/* Additional hover and focus effects */
+.vaccine-button:active {
+  transform: translateY(0);
+}
+
+.vaccine-button:focus {
+  outline: 2px solid #06B6D4;
+  outline-offset: 2px;
+}
+
+.checkbox-container:hover {
+  border-color: #06B6D4;
+}
+
+.checkbox-container:active {
+  transform: scale(0.95);
+}
+
+.checkbox-container:focus {
+  outline: 2px solid #06B6D4;
+  outline-offset: 2px;
+}
+
+.search-input:focus {
+  border-color: #0891B2;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+/* Touch improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .vaccine-button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .vaccine-button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .checkbox-container:hover {
+    border-color: #D1D5DB;
+  }
+
+  .checkbox-container:active {
+    transform: scale(0.92);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Ensure minimum touch target size for accessibility */
+@media (max-width: 768px) {
+  .vaccine-button {
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+
+  .checkbox-container {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px;
+  }
+
+  .side-effects-grid > div {
+    min-height: 44px;
+    align-items: center;
+  }
+}

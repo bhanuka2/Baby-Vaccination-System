@@ -8,6 +8,12 @@ import AdminDashboard from './assets/components/Admin/AdminDashboard';
 import AD1 from './assets/components/Admin/AD1';
 import AD2 from './assets/components/Admin/AD2';
 import AD3 from './assets/components/Admin/AD3';
+import PatientSearch  from './assets/components/Admin/PatientSearch';
+import ParentDashboard from './assets/components/Parent/ParentDashboard';
+import PD1 from './assets/components/Parent/PD1';
+import PD2 from './assets/components/Parent/PD2';
+import PD3 from './assets/components/Parent/PD3';
+import PD5 from './assets/components/Parent/PD5';
 
 function App() {
   return (
@@ -22,8 +28,10 @@ function App() {
     //     </Routes>
     //   </div>
     // </Router> */}
-    <AdminDashboard/>
-    <AD3 />
+
+    <Router>
+      <ParentDashboard/>
+    </Router>
     </>
   );
 }
