@@ -6,7 +6,6 @@ import PD1 from './PD1';
 import PD3 from './PD3';
 import PD2 from './PD4';
 import PD4 from './PD4';
-import PD5 from './PD5';
 
 const ParentDashboard: React.FC = () => {
   return (
@@ -43,7 +42,7 @@ const ParentDashboard: React.FC = () => {
           <Route path="/register-baby" element={<PD4 />} />
           <Route path="/alerts-notifications" element={<PD3 />} />
           <Route path="/vaccination-schedule" element={<PD2 />} />
-          <Route path="/report-symptoms" element={<PD5 />} />
+          <Route path="/report-symptoms" element={<PD4 />} />
           <Route path="/medical-records" element={<PD3 />} /> 
           <Route path="/" element={<AD2 />} /> {/* Default route */}
         </Routes>

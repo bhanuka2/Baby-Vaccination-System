@@ -1,12 +1,9 @@
 import React from 'react';
-import Header from '../Common/Header';
 import Footer from '../Common/Footer';
 
 const Home: React.FC = () => {
   return (
     <div className="home-container">
-      <Header showDashboardButtons={false} />
-      
       <main className="home-content">
         <div className="hero-section">
           <div className="hero-text">
@@ -32,7 +29,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </main>
-      
       <Footer />
     </div>
   );

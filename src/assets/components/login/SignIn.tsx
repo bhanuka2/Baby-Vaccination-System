@@ -14,8 +14,16 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
+    // Simulate API call and handle role-based navigation
     try {
+      if (email === 'admin@gmail.com' && password === 'admin') {
+        navigate('/admin');
+        return;
+      }
+      if (email === 'parent@gmail.com' && password === 'parent') {
+        navigate('/parent');
+        return;
+      }
       console.log('Login attempt:', { email, password, rememberMe });
       // Add your authentication logic here
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated delay
@@ -113,7 +121,6 @@ const Login = () => {
               className="login-button" 
               disabled={isLoading} 
               style={{marginTop: '30px',width: '500px'}}
-              onClick={() => navigate('/customer-interface')}
             >
               {isLoading ? 'Signing in...' : 'Log in'}
             </button>

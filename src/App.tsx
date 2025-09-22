@@ -14,6 +14,7 @@ import PD1 from './assets/components/Parent/PD1';
 import PD2 from './assets/components/Parent/PD2';
 import PD3 from './assets/components/Parent/PD3';
 import PD5 from './assets/components/Parent/PD5';
+import Header from './assets/components/Common/Header.tsx'; 
 
 function App() {
   return (
@@ -30,7 +31,26 @@ function App() {
     // </Router> */}
 
     <Router>
-      <ParentDashboard/>
+      {/* Always show Header except on /signin and /signup */}
+      <Routes>
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="*"
+          element={
+            <>
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/customer-interface" element={<CustomerInterface1 />} />
+                <Route path="/admin/*" element={<AdminDashboard />} />
+                <Route path="/parent/*" element={<ParentDashboard />} />
+                {/* ...add other routes as needed... */}
+              </Routes>
+            </>
+          }
+        />
+      </Routes>
     </Router>
     </>
   );
