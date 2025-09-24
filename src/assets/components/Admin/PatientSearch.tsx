@@ -53,7 +53,7 @@ const CustomCheckbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) =
 };
 
 const PatientSearch: React.FC = () => {
-  const [patientName, setPatientName] = useState('Kusal Mendis');
+  const [patientName, setPatientName] = useState('');
   const [babyOneVaccines, setBabyOneVaccines] = useState({
     BCG: false,
     OPV: false,
@@ -122,8 +122,8 @@ const PatientSearch: React.FC = () => {
   const sideEffectsList = ['Irritability/Fussiness', 'Loss of appetite', 'Lethargy', 'Vomiting', 'Diarrhea', 'Rash'];
 
   return (
-    <div className="patient-search-container" style={{marginTop: '-700px' , marginLeft: '250px'}}>
-      <h1 className="patient-search-title">
+    <div className="patient-search-container" >
+      <h1 className="patient-search-title" >
         Patient Search
       </h1>
       
@@ -143,7 +143,7 @@ const PatientSearch: React.FC = () => {
       <div className="section-title">
         Baby one *
       </div>
-      
+
       <div className="vaccine-grid">
         {vaccines.map((vaccine) => (
           <VaccineButton

@@ -2,8 +2,8 @@ import * as React from "react";
 
 function AD2() {
   return (
-    <div className="dashboard-container" style={{marginTop: '-753px' , marginLeft: '225px', width: '100%', maxWidth: '1090px', padding: '20px', fontFamily: 'Inter, sans-serif', backgroundColor: '#fff'}}>
-      <div className="dashboard-header" >
+    <div className="dashboard-container">
+      <div className="dashboard-header">
         <h1 className="dashboard-title">PHM / MOH Dashboard</h1>
         <p className="dashboard-description">
           Manage patient records and respond to health emergencies
@@ -141,11 +141,10 @@ function AD2() {
       <style >{`
         .dashboard-container {
           width: 100%;
-          max-width: 860px;
-          margin: 0 auto;
           padding: 20px;
           font-family: Inter, sans-serif;
           background-color: #fff;
+          box-sizing: border-box;
         }
 
         .dashboard-header {
@@ -154,29 +153,37 @@ function AD2() {
 
         .dashboard-title {
           color: #333;
-          margin-bottom: 8px;
-          font: 700 24px Inter;
+          font-size: 24px;
+          font-weight: 700;
           margin: 0 0 8px 0;
         }
 
         .dashboard-description {
           color: #666;
-          margin-bottom: 32px;
-          font: 400 14px Inter;
+          font-size: 14px;
+          font-weight: 400;
           margin: 0;
         }
 
         .stats-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          grid-template-columns: repeat(4, 1fr);
           gap: 20px;
           margin-bottom: 40px;
         }
 
         .stat-card {
           position: relative;
-          width: 202px;
-          height: 102px;
+          height: 120px;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .stat-card-background {
@@ -211,12 +218,17 @@ function AD2() {
         .stat-card-content {
           position: relative;
           z-index: 1;
-          padding: 11px 20px;
+          padding: 16px 20px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         .stat-label {
-          font: 700 14px Inter;
-          margin-bottom: 5px;
+          font-weight: 700;
+          font-size: 14px;
+          margin-bottom: 8px;
         }
 
         .stat-label-blue {
@@ -237,18 +249,20 @@ function AD2() {
 
         .stat-number {
           color: #333;
-          font: 700 32px Inter;
+          font-weight: 700;
+          font-size: 32px;
           margin-bottom: 5px;
         }
 
         .stat-subtitle {
           color: #666;
-          font: 400 12px Inter;
+          font-size: 12px;
         }
 
         .section-title {
           color: #333;
-          font: 700 18px Inter;
+          font-weight: 700;
+          font-size: 18px;
           margin-bottom: 24px;
         }
 
@@ -257,6 +271,7 @@ function AD2() {
         }
 
         .records-section-title {
+          margin-top: 32px;
           margin-bottom: 24px;
         }
 
@@ -267,15 +282,20 @@ function AD2() {
         .alert-card {
           position: relative;
           width: 100%;
-          border-radius: 4px;
+          border-radius: 8px;
+          padding: 16px 20px 16px 50px;
+          min-height: 80px;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
         }
 
         .alert-high-priority {
-          height: 54px;
+          min-height: 90px;
         }
 
         .alert-medium-priority {
-          height: 60px;
+          min-height: 90px;
         }
 
         .alert-background {
@@ -284,7 +304,8 @@ function AD2() {
           left: 0;
           width: 100%;
           height: 100%;
-          border-radius: 4px;
+          border-radius: 8px;
+          z-index: -1;
         }
 
         .alert-background-red {
@@ -299,11 +320,12 @@ function AD2() {
 
         .alert-indicator {
           position: absolute;
-          top: 22px;
+          top: 50%;
           left: 20px;
           width: 10px;
           height: 10px;
           border-radius: 50%;
+          transform: translateY(-50%);
         }
 
         .alert-indicator-red {
@@ -315,15 +337,14 @@ function AD2() {
         }
 
         .alert-content {
-          position: absolute;
-          left: 40px;
-          top: 6px;
-          right: 120px;
+          flex: 1;
+          padding-right: 100px;
         }
 
         .alert-priority {
-          font: 700 12px Inter;
-          margin-bottom: 2px;
+          font-weight: 700;
+          font-size: 12px;
+          margin-bottom: 4px;
         }
 
         .alert-priority-high {
@@ -336,27 +357,33 @@ function AD2() {
 
         .alert-description {
           color: #333;
-          font: 400 14px Inter;
-          margin-bottom: 3px;
+          font-size: 14px;
+          margin-bottom: 4px;
         }
 
         .alert-details {
           color: #666;
-          font: 400 12px Inter;
+          font-size: 12px;
         }
 
         .alert-button {
           position: absolute;
-          top: 12px;
+          top: 50%;
           right: 20px;
           width: 80px;
-          height: 30px;
+          height: 32px;
           border: none;
           border-radius: 4px;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
+          transform: translateY(-50%);
+          transition: opacity 0.2s;
+        }
+
+        .alert-button:hover {
+          opacity: 0.9;
         }
 
         .alert-button-red {
@@ -369,7 +396,8 @@ function AD2() {
 
         .alert-button-text {
           color: #FFF;
-          font: 400 12px Inter;
+          font-weight: 500;
+          font-size: 12px;
         }
 
         .records-table-container {
@@ -378,51 +406,38 @@ function AD2() {
           background: white;
           border: 1px solid #E5E5E5;
           border-radius: 8px;
-        }
-
-        .table-background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: white;
-          border: 1px solid #E5E5E5;
-          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .table-header {
-          position: relative;
-          z-index: 1;
           background: #F8F9FA;
-          padding: 8px 20px;
-          margin-top: 32px;
+          padding: 12px 20px;
         }
 
         .table-header-row {
           display: grid;
-          grid-template-columns: 150px 100px 120px 80px 1fr;
+          grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr;
           gap: 20px;
           align-items: center;
         }
 
         .header-cell {
           color: #333;
-          font: 700 12px Inter;
+          font-weight: 700;
+          font-size: 12px;
         }
 
         .table-body {
-          position: relative;
-          z-index: 1;
           padding: 0 20px 20px;
         }
 
         .table-row {
           display: grid;
-          grid-template-columns: 150px 100px 120px 80px 1fr;
+          grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr;
           gap: 20px;
           align-items: center;
-          padding: 10px 0;
+          padding: 12px 0;
           border-bottom: 1px solid #f0f0f0;
         }
 
@@ -432,15 +447,15 @@ function AD2() {
 
         .table-cell {
           color: #333;
-          font: 400 12px Inter;
+          font-size: 13px;
         }
 
         .status-badge {
           display: inline-block;
-          padding: 2px 12px;
-          border-radius: 10px;
+          padding: 4px 12px;
+          border-radius: 12px;
           color: #FFF;
-          font: 400 10px Inter;
+          font-size: 11px;
           text-align: center;
         }
 
@@ -457,18 +472,20 @@ function AD2() {
           color: #FFF;
           border: none;
           border-radius: 4px;
-          padding: 2px 13px;
-          font: 400 10px Inter;
+          padding: 4px 15px;
+          font-size: 11px;
           cursor: pointer;
-          width: 50px;
-          height: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          transition: background-color 0.2s;
         }
 
         .action-button:hover {
-          opacity: 0.9;
+          background-color: #3a7bc8;
+        }
+
+        @media (max-width: 1200px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
 
         @media (max-width: 768px) {
@@ -482,7 +499,7 @@ function AD2() {
           }
 
           .stat-card {
-            width: 100%;
+            height: 100px;
           }
 
           .dashboard-title {
@@ -490,18 +507,18 @@ function AD2() {
           }
 
           .alert-content {
-            right: 100px;
+            padding-right: 90px;
           }
 
           .table-header-row,
           .table-row {
-            grid-template-columns: 1fr;
+            grid-template-columns: 2fr 1fr 1.5fr 1fr 0.8fr;
             gap: 10px;
           }
 
           .header-cell,
           .table-cell {
-            padding: 5px 0;
+            font-size: 11px;
           }
         }
 
@@ -519,13 +536,26 @@ function AD2() {
           }
 
           .alert-button {
-            width: 60px;
-            height: 25px;
+            width: 70px;
             font-size: 10px;
           }
 
-          .alert-content {
-            right: 80px;
+          .table-header-row,
+          .table-row {
+            grid-template-columns: 1.5fr 0.8fr 1fr 0.8fr 0.8fr;
+            gap: 8px;
+          }
+
+          .alert-card {
+            padding: 12px 12px 12px 40px;
+          }
+
+          .alert-indicator {
+            left: 15px;
+          }
+
+          .alert-button {
+            right: 15px;
           }
         }
       `}</style>
