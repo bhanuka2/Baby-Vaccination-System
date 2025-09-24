@@ -161,7 +161,7 @@ const PD4: React.FC = () => {
   };
 
   return (
-    <div className="register-baby-container" style={{marginTop: '-880px' , marginLeft: '180px',width:'1090px'}} >
+    <div className="register-baby-container">
       <div className="register-baby-content">
         <div className="content-wrapper">
           {/* Header */}
@@ -389,20 +389,17 @@ const PD4: React.FC = () => {
 
       <style >{`
         .register-baby-container {
-          width: 946px;
-          height: 656px;
-          max-width: 100%;
-          background-color: #F0F9FF;
+          width: 100%;
+          max-width: 1100px;
           margin: 0 auto;
+          background-color: #F0F9FF;
           position: relative;
         }
 
         .register-baby-content {
-          width: 1000px;
-          height: 814px;
-          position: absolute;
-          left: 25px;
-          top: 21px;
+          width: 100%;
+          height: auto;
+          position: relative;
           background-color: white;
           border-radius: 12px;
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

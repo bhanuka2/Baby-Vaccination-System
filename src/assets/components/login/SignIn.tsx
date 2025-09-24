@@ -113,7 +113,7 @@ const Login = () => {
               className="login-button" 
               disabled={isLoading} 
               style={{marginTop: '30px',width: '500px'}}
-              onClick={() => navigate('/admin')}
+              onClick={() => navigate('/parent')}
             >
               {isLoading ? 'Signing in...' : 'Log in'}
             </button>

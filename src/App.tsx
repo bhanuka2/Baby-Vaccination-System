@@ -52,6 +52,7 @@ function App() {
             <Route path="dashboard" element={<PD1 />} />
             <Route path="vaccination-records" element={<PD2 />} />
             <Route path="reminders" element={<PD3 />} />
+            <Route path="report-symptoms" element={<PD5 />} />
             <Route path="profile" element={<PD5 />} />
           </Route>
           
