@@ -12,10 +12,12 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
     "bootstrap": "^5.3.7",
+    "chart.js": "^4.5.0",
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.12.9",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
     "tailwindcss": "^4.1.12"
