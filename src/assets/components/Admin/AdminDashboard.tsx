@@ -1,12 +1,11 @@
 import * as React from "react";
-import { Link, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Link, useLocation, Outlet, Navigate } from "react-router-dom";
 import AD1 from "./AD1";
 import AD2 from "./AD2";
 import AD3 from "./AD3";
 import PatientSearch from "./PatientSearch";
 
 function AdminDashboard() {
-  // Get current location to highlight active tab
   const location = useLocation();
   const isActive = (path: string) => location.pathname.endsWith(path);
 
@@ -43,17 +42,11 @@ function AdminDashboard() {
           </div>
         </div>
       </div>
-
       {/* Right side content */}
       <div className="flex-1 p-4">
-        <Routes>
-          {/* Redirect /admin to /admin/dashboard so AD2 is shown by default */}
-          <Route index element={<Navigate to="dashboard" replace />} />
-          <Route path="dashboard" element={<AD2 />} />
-          <Route path="manage-records" element={<AD1 />} />
-          <Route path="patients-search" element={<PatientSearch />} />
-          <Route path="vaccination-programs" element={<AD3 />} />
-        </Routes>
+        {/* Redirect /admin to /admin/dashboard */}
+        {location.pathname === "/admin" && <Navigate to="dashboard" replace />}
+        <Outlet />
       </div>
     </div>
   );

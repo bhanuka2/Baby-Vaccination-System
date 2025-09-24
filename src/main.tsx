@@ -8,6 +8,8 @@ import{
 import AD1 from './assets/components/Admin/AD1.tsx'
 import AD3 from './assets/components/Admin/AD3.tsx'
 import AD2 from './assets/components/Admin/AD2.tsx'
+import HomeUI from './assets/components/Home/HomeUI.tsx'
+import PACreate from './assets/components/login/PACreate.tsx'
 
 const router = createBrowserRouter([
   {
@@ -30,8 +32,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    
+
     <App />
-  
+
   </StrictMode>,
 )

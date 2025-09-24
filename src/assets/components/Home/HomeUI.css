@@ -1,0 +1,435 @@
+.home-ui-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  background-color: #FFF;
+}
+
+.main-hero-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 106px 140px 0 140px;
+  min-height: 500px;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 520px;
+}
+
+.hero-title {
+  color: #000;
+  margin-bottom: 32px;
+  font: 700 48px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.hero-description {
+  color: #000;
+  margin-bottom: 48px;
+  max-width: 375px;
+  font: 700 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.primary-action-button {
+  width: 170px;
+  height: 39px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #FE4245;
+}
+
+.secondary-action-button {
+  width: 170px;
+  height: 39px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #4B62F5;
+}
+
+.button-text {
+  color: #FFF;
+  font: 700 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.hero-image-container {
+  flex-shrink: 0;
+  margin-left: 40px;
+}
+
+.hero-main-image {
+  width: 557px;
+  height: 538px;
+  object-fit: cover;
+}
+
+.vaccination-section {
+  position: relative;
+  margin-top: 80px;
+}
+
+.vaccination-background {
+  position: relative;
+}
+
+.vaccination-bg-svg {
+  width: 100%;
+  height: 57px;
+  fill: rgba(136, 151, 248, 0.13);
+}
+
+.vaccination-title {
+  position: absolute;
+  top: 7px;
+  left: 69px;
+  color: #0003C3;
+  font: 700 36px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.trust-section {
+  position: relative;
+  margin-top: 51px;
+  padding: 0 33px;
+}
+
+.trust-image {
+  width: 100%;
+  max-width: 658px;
+  height: 329px;
+  object-fit: cover;
+}
+
+.trust-message {
+  position: absolute;
+  right: 98px;
+  top: 162px;
+}
+
+.trust-text {
+  color: #000;
+  max-width: 565px;
+  font: 400 32px Frank Ruhl Libre, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.call-to-action-section {
+  position: relative;
+  margin-top: 73px;
+  padding: 0 33px;
+  width: 100%;
+}
+
+.cta-background {
+  width: calc(100% - 66px);
+  height: 88px;
+  background-color: rgba(91, 192, 255, 0.62);
+}
+
+.cta-title {
+   display: inline;
+  position: absolute;
+  top: 6px;
+  left: 68px;
+  color: #000;
+  font: 600 48px Frank Ruhl Libre, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.cta-highlight {
+  color: #F00;
+}
+
+.cta-button {
+  position: absolute;
+  top: 11px;
+  right: 186px;
+  width: 258px;
+  height: 63px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #1B6BFF;
+}
+
+.cta-button-text {
+  color: #FFF;
+  font: 700 36px Frank Ruhl Libre, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 71px;
+  padding: 0 55px;
+}
+
+.benefit-card {
+  width: 401px;
+  height: 241px;
+  padding: 28px 16px;
+  box-sizing: border-box;
+  background-color: #D9D9D9;
+}
+
+.benefit-card.top-left {
+  border-radius: 40px 0 0 0;
+}
+
+.benefit-card.top-right {
+  border-radius: 0 40px 0 0;
+}
+
+.benefit-card.bottom-left {
+  border-radius: 0 0 0 40px;
+}
+
+.benefit-card.bottom-right {
+  border-radius: 0 0 40px 0;
+}
+
+.benefit-content {
+  color: #000;
+  text-align: center;
+  font: 400 18px Frank Ruhl Libre, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.benefit-title {
+  font-weight: 700;
+  font-size: 20px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.benefit-description {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.partners-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 154px 60px 154px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.partner-logo {
+  flex-shrink: 0;
+}
+
+.partner-logo:nth-child(1) {
+  width: 166px;
+  height: 166px;
+}
+
+.partner-logo:nth-child(2) {
+  width: 208px;
+  height: 209px;
+}
+
+.partner-logo:nth-child(3) {
+  width: 183px;
+  height: 183px;
+}
+
+.partner-logo:nth-child(4) {
+  width: 225px;
+  height: 225px;
+}
+
+.partner-logo:nth-child(5) {
+  width: 213px;
+  height: 154px;
+}
+
+.partner-logo:nth-child(6) {
+  width: 225px;
+  height: 225px;
+}
+
+/* Tablet styles */
+@media (max-width: 991px) {
+  .home-ui-container {
+    max-width: 991px;
+  }
+
+  .main-hero-section {
+    flex-direction: column;
+    padding: 60px 40px 0 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+    margin-bottom: 24px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-main-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .vaccination-title {
+    left: 40px;
+    font-size: 28px;
+  }
+
+  .trust-message {
+    position: static;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .trust-text {
+    font-size: 24px;
+    max-width: 100%;
+  }
+
+  .cta-title {
+    left: 40px;
+    font-size: 36px;
+  }
+
+  .cta-button {
+    position: static;
+    margin: 20px auto 0;
+    width: 200px;
+    height: 50px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  .benefit-card {
+    width: 100%;
+    border-radius: 20px !important;
+  }
+
+  .partners-section {
+    padding: 40px 20px;
+    justify-content: center;
+  }
+
+  .partner-logo {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 640px) {
+  .home-ui-container {
+    max-width: 640px;
+  }
+
+  .main-hero-section {
+    padding: 40px 20px 0 20px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .primary-action-button,
+  .secondary-action-button {
+    width: 200px;
+  }
+
+  .vaccination-title {
+    left: 20px;
+    font-size: 24px;
+  }
+
+  .trust-section {
+    padding: 0 20px;
+  }
+
+  .trust-text {
+    font-size: 18px;
+  }
+
+  .call-to-action-section {
+    padding: 0 20px;
+  }
+
+  .cta-title {
+    left: 20px;
+    font-size: 24px;
+  }
+
+  .cta-button {
+    width: 160px;
+    height: 45px;
+  }
+
+  .cta-button-text {
+    font-size: 18px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+
+  .benefit-title {
+    font-size: 18px;
+  }
+
+  .benefit-content {
+    font-size: 16px;
+  }
+
+  .partners-section {
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+  }
+
+  .partner-logo {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}

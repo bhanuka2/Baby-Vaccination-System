@@ -15,43 +15,49 @@ import PD2 from './assets/components/Parent/PD2';
 import PD3 from './assets/components/Parent/PD3';
 import PD5 from './assets/components/Parent/PD5';
 import Header from './assets/components/Common/Header.tsx'; 
+import HomeUI from './assets/components/Home/HomeUI.tsx';
+import PACreate from './assets/components/login/PACreate';
+import AACreate from './assets/components/login/AACreate.tsx';
 
 function App() {
   return (
     <>
-    {/* // <Router>
-    //   <div className="app">
-    //     <Routes>
-    //       <Route path="/" element={<Home />} />
-    //       <Route path="/signin" element={<SignIn />} />
-    //       <Route path="/signup" element={<SignUp />} />
-    //       <Route path="/customer-interface" element={<CustomerInterface1 />} />
-    //     </Routes>
-    //   </div>
-    // </Router> */}
-
-    <Router>
-      {/* Always show Header except on /signin and /signup */}
-      <Routes>
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route
-          path="*"
-          element={
-            <>
-              <Header />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/customer-interface" element={<CustomerInterface1 />} />
-                <Route path="/admin/*" element={<AdminDashboard />} />
-                <Route path="/parent/*" element={<ParentDashboard />} />
-                {/* ...add other routes as needed... */}
-              </Routes>
-            </>
-          }
-        />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/pa-create" element={<PACreate />} />
+          <Route
+            path="*"
+            element={
+              <>
+                <Header />
+                <Routes>
+                  <Route path="/" element={<AACreate />} />
+                  <Route path="/customer-interface" element={<CustomerInterface1 />} />
+                  {/* Admin Dashboard with nested routes */}
+                  <Route path="/admin/*" element={<AdminDashboard />}>
+                    <Route index element={<AD2 />} />
+                    <Route path="dashboard" element={<AD2 />} />
+                    <Route path="manage-records" element={<AD1 />} />
+                    <Route path="patients-search" element={<PatientSearch />} />
+                    <Route path="vaccination-programs" element={<AD3 />} />
+                  </Route>
+                  {/* Parent Dashboard with nested routes */}
+                  <Route path="/parent/*" element={<ParentDashboard />}>
+                    <Route index element={<PD1 />} />
+                    <Route path="dashboard" element={<PD1 />} />
+                    <Route path="vaccination-records" element={<PD2 />} />
+                    <Route path="reminders" element={<PD3 />} />
+                    <Route path="profile" element={<PD5 />} />
+                  </Route>
+                  {/* ...other routes... */}
+                </Routes>
+              </>
+            }
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
