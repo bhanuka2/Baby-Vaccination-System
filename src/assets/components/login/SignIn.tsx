@@ -60,7 +60,7 @@ const Login = () => {
           
           <form onSubmit={handleSubmit}>
             <div className="input-group">
-              <div className="input-wrapper" style={{width: '500px'}}>
+              <div className="input-wrapper" style={{width: '365px'}}>
                 <input
                   id="email"
                   type="email"

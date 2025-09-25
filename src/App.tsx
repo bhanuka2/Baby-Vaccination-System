@@ -18,11 +18,12 @@ import Header from './assets/components/Common/Header.tsx';
 import HomeUI from './assets/components/Home/HomeUI.tsx';
 import PACreate from './assets/components/login/PACreate';
 import AACreate from './assets/components/login/AACreate.tsx';
+import Footer from './assets/components/Common/Footer.tsx';
 
 function App() {
   return (
-    <>
-      <Router>
+    <Router>
+      <div className="flex flex-col min-h-screen overflow-x-hidden">
         <Routes>
           {/* Authentication Routes */}
           <Route path="/signin" element={<SignIn />} />
@@ -34,11 +35,31 @@ function App() {
           <Route path="/" element={<Navigate to="/signin" />} />
           
           {/* Routes with Header */}
-          <Route path="/home" element={<><HomeUI /></>} />
-          <Route path="/customer-interface" element={<><Header /><CustomerInterface1 /></>} />
+          <Route path="/home" element={
+            <div className="flex flex-col min-h-screen">
+              <HomeUI />
+            </div>
+          } />
+          <Route path="/customer-interface" element={
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <div className="flex-grow">
+                <CustomerInterface1 />
+              </div>
+              <Footer />
+            </div>
+          } />
           
           {/* Admin Routes */}
-          <Route path="/admin" element={<><Header /><AdminDashboard /></>}>
+          <Route path="/admin" element={
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <div className="flex-grow">
+                <AdminDashboard />
+              </div>
+              <Footer />
+            </div>
+          }>
             <Route index element={<Navigate to="/admin/dashboard" />} />
             <Route path="dashboard" element={<AD2 />} />
             <Route path="manage-records" element={<AD1 />} />
@@ -47,7 +68,15 @@ function App() {
           </Route>
           
           {/* Parent Routes */}
-          <Route path="/parent" element={<><Header /><ParentDashboard /></>}>
+          <Route path="/parent" element={
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <div className="flex-grow">
+                <ParentDashboard />
+              </div>
+              <Footer />
+            </div>
+          }>
             <Route index element={<Navigate to="/parent/dashboard" />} />
             <Route path="dashboard" element={<PD1 />} />
             <Route path="vaccination-records" element={<PD2 />} />
@@ -59,8 +88,8 @@ function App() {
           {/* Catch-all route - redirect to signin */}
           <Route path="*" element={<Navigate to="/signin" />} />
         </Routes>
-      </Router>
-    </>
+      </div>
+    </Router>
   );
 }
 
