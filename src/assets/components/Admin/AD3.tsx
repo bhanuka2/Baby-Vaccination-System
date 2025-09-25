@@ -31,7 +31,7 @@ function AD3() {
   };
 
   return (
-    <div className="vaccination-programs-container" style={{marginTop: '-700px' , marginLeft: '250px'}}>
+   <div className="vaccination-programs-container">
       <div className="vaccination-programs-main">
         <h1 className="vaccination-programs-title">Vaccination Programs</h1>
         
@@ -182,38 +182,44 @@ function AD3() {
 
       <style >{`
         .vaccination-programs-container {
-          width: 942px;
-          height: 522px;
-          background-color: #F0F9FF;
+          width: 100%;
+          background-color: #FFFFFF;
           position: relative;
-          padding: 53px;
+          padding: 24px;
           box-sizing: border-box;
           font-family: Inter, sans-serif;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
         .vaccination-programs-main {
           width: 100%;
-          height: 100%;
           position: relative;
         }
 
         .vaccination-programs-title {
-          color: #111827;
-          font: 700 18px Inter;
-          margin: 0 0 47px 0;
+          color: #1F2937;
+          font-weight: 700;
+          font-size: 28px;
+          margin: 0 0 32px 0;
+          text-align: left;
         }
 
         .month-selection-section {
-          width: 371px;
-          margin-bottom: 18px;
+          width: 100%;
+          max-width: 320px;
+          margin-bottom: 28px;
           position: relative;
         }
 
         .month-selection-label {
           display: block;
           color: #374151;
-          font: 400 12px Inter;
-          margin-bottom: 5px;
+          font-weight: 600;
+          font-size: 15px;
+          margin-bottom: 10px;
         }
 
         .month-dropdown-container {
@@ -221,162 +227,209 @@ function AD3() {
         }
 
         .month-dropdown-button {
-          width: 371px;
-          height: 27px;
+          width: 100%;
+          height: 48px;
           background: white;
-          border: 2px solid #06B6D4;
-          border-radius: 13px;
-          padding: 0 20px;
+          border: 2px solid #4A90E2;
+          border-radius: 10px;
+          padding: 0 18px;
           display: flex;
           align-items: center;
           justify-content: space-between;
           cursor: pointer;
           font-family: Inter, sans-serif;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .month-dropdown-button:hover {
+          background-color: #F0F8FF;
+          border-color: #357ABD;
+          box-shadow: 0 4px 8px rgba(74, 144, 226, 0.15);
         }
 
         .month-dropdown-text {
-          color: #06B6D4;
-          font: 400 12px Inter;
+          color: #4A90E2;
+          font-weight: 600;
+          font-size: 15px;
         }
 
         .month-dropdown-arrow {
-          color: #06B6D4;
-          font-size: 8px;
+          color: #4A90E2;
+          font-size: 12px;
           transform: rotate(90deg);
+          transition: transform 0.2s ease;
         }
 
         .month-dropdown-options {
           position: absolute;
-          top: 27px;
+          top: 100%;
           left: 0;
-          width: 371px;
+          width: 100%;
           background: white;
           border: 1px solid #E5E7EB;
-          border-radius: 13px;
-          z-index: 10;
+          border-radius: 10px;
+          z-index: 20;
+          margin-top: 6px;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+          overflow: hidden;
         }
 
         .month-dropdown-option {
-          padding: 8px 20px;
+          padding: 12px 18px;
           color: #374151;
-          font: 400 11px Inter;
+          font-size: 15px;
           cursor: pointer;
-          border-bottom: 1px solid #E5E7EB;
+          transition: background-color 0.2s;
+          font-weight: 500;
         }
 
-        .month-dropdown-option:last-child {
-          border-bottom: none;
+        .month-dropdown-option:not(:last-child) {
+          border-bottom: 1px solid #F3F4F6;
         }
 
         .month-dropdown-option:hover {
-          background-color: #F9FAFB;
+          background-color: #F8FAFC;
+          color: #1F2937;
         }
 
         .vaccine-category-section {
-          margin-bottom: 18px;
+          margin-bottom: 32px;
         }
 
         .vaccine-category-label {
           display: block;
           color: #374151;
-          font: 400 12px Inter;
-          margin-bottom: 16px;
+          font-weight: 600;
+          font-size: 16px;
+          margin-bottom: 18px;
         }
 
         .vaccine-buttons-grid {
           display: grid;
-          grid-template-columns: repeat(4, 159px);
-          grid-template-rows: repeat(2, 31px);
-          gap: 13px 13px;
-          width: 676px;
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 16px;
+          width: 100%;
         }
 
         .vaccine-button {
-          width: 159px;
-          height: 31px;
-          border-radius: 15px;
-          border: none;
+          height: 48px;
+          border-radius: 10px;
+          border: 2px solid #E5E7EB;
           cursor: pointer;
-          color: #374151;
-          font: 400 11px Inter;
+          font-size: 14px;
+          font-weight: 500;
           text-align: center;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
+          background: white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.04);
         }
 
         .vaccine-button-selected {
-          background: #FEE2E2;
+          background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
           border: 2px solid #EF4444;
-          color: #EF4444;
+          color: #DC2626;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+          transform: translateY(-2px);
         }
 
         .vaccine-button-unselected {
           background: white;
-          border: 1px solid #D1D5DB;
+          border: 2px solid #E5E7EB;
           color: #6B7280;
         }
 
         .vaccine-button-unselected:hover {
           background: #F9FAFB;
+          border-color: #9CA3AF;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.08);
         }
 
         .baby-counts-section {
           display: grid;
-          grid-template-columns: repeat(3, 199px);
-          gap: 33px;
-          margin-bottom: 42px;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 20px;
+          margin-bottom: 36px;
         }
 
         .baby-count-field {
           display: flex;
           flex-direction: column;
+          background: #F8FAFC;
+          padding: 20px;
+          border-radius: 12px;
+          border: 1px solid #E2E8F0;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+          transition: all 0.2s ease;
+        }
+
+        .baby-count-field:hover {
+          box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+          transform: translateY(-1px);
         }
 
         .baby-count-label {
-          color: #374151;
-          font: 400 12px Inter;
-          margin-bottom: 5px;
+          color: #475569;
+          font-weight: 600;
+          font-size: 14px;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
 
         .baby-count-input {
-          width: 199px;
-          height: 25px;
+          width: 100%;
+          height: 44px;
           background: white;
-          border: 1px solid #D1D5DB;
-          border-radius: 12px;
-          padding: 0 13px;
-          color: #000;
-          font: 400 16px Inter;
+          border: 2px solid #CBD5E1;
+          border-radius: 8px;
+          padding: 0 14px;
+          color: #1F2937;
+          font-size: 16px;
+          font-weight: 600;
           box-sizing: border-box;
+          transition: all 0.2s ease;
         }
 
         .baby-count-input:focus {
           outline: none;
-          border-color: #06B6D4;
+          border-color: #4A90E2;
+          box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+          background: #FEFEFE;
         }
 
         .additional-vaccines-section {
-          margin-bottom: 20px;
+          margin-bottom: 30px;
+          padding: 24px;
+          background: linear-gradient(135deg, #F8FAFC, #F1F5F9);
+          border-radius: 12px;
+          border: 1px solid #E2E8F0;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .additional-vaccines-label {
           display: block;
-          color: #374151;
-          font: 400 12px Inter;
-          margin-bottom: 17px;
+          color: #334155;
+          font-weight: 600;
+          font-size: 16px;
+          margin-bottom: 20px;
         }
 
         .additional-vaccines-grid {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 18px;
         }
 
         .vaccine-checkbox-row {
           display: flex;
-          gap: 30px;
+          flex-wrap: wrap;
+          gap: 28px;
         }
 
         .vaccine-checkbox-item {
@@ -384,6 +437,14 @@ function AD3() {
           align-items: center;
           cursor: pointer;
           position: relative;
+          padding: 8px 12px;
+          border-radius: 8px;
+          transition: all 0.2s ease;
+          min-width: 180px;
+        }
+
+        .vaccine-checkbox-item:hover {
+          background: rgba(255,255,255,0.6);
         }
 
         .vaccine-checkbox {
@@ -395,101 +456,91 @@ function AD3() {
 
         .vaccine-checkbox-custom {
           width: 20px;
-          height: 12px;
+          height: 20px;
           background: white;
-          border: 1px solid #D1D5DB;
-          border-radius: 3px;
-          margin-right: 13px;
+          border: 2px solid #CBD5E1;
+          border-radius: 5px;
+          margin-right: 12px;
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all 0.3s ease;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .vaccine-checkbox:checked + .vaccine-checkbox-custom {
-          background: #06B6D4;
-          border-color: #06B6D4;
+          background: linear-gradient(135deg, #06B6D4, #0891B2);
+          border-color: #0891B2;
+          box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
         }
 
         .vaccine-checkbox:checked + .vaccine-checkbox-custom::after {
           content: '✓';
           color: white;
-          font-size: 8px;
+          font-size: 14px;
           font-weight: bold;
         }
 
         .vaccine-checkbox-label {
-          color: #374151;
-          font: 400 11px Inter;
-        }
-
-        .vaccine-checkbox:checked ~ .vaccine-checkbox-label {
-          color: #374151;
+          color: #334155;
+          font-size: 15px;
+          font-weight: 500;
         }
 
         @media (max-width: 991px) {
           .vaccination-programs-container {
-            width: 100%;
-            max-width: 942px;
-            height: auto;
-            min-height: 522px;
             padding: 20px;
+            margin: 0 16px;
           }
 
           .vaccination-programs-title {
-            font-size: 16px;
-          }
-
-          .month-selection-section {
-            width: 100%;
-            max-width: 371px;
-          }
-
-          .month-dropdown-button {
-            width: 100%;
-          }
-
-          .month-dropdown-options {
-            width: 100%;
+            font-size: 24px;
+            margin-bottom: 28px;
           }
 
           .vaccine-buttons-grid {
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            width: 100%;
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
           }
 
           .baby-counts-section {
             grid-template-columns: 1fr;
-            gap: 20px;
-            width: 100%;
-          }
-
-          .baby-count-input {
-            width: 100%;
-          }
-
-          .vaccine-checkbox-row {
-            flex-direction: column;
-            gap: 10px;
+            gap: 16px;
           }
         }
 
         @media (max-width: 640px) {
           .vaccination-programs-container {
             padding: 16px;
+            margin: 0 8px;
           }
 
           .vaccination-programs-title {
-            font-size: 14px;
+            font-size: 20px;
+            margin-bottom: 24px;
+          }
+
+          .vaccine-checkbox-row {
+            flex-direction: column;
+            gap: 12px;
+          }
+
+          .vaccine-checkbox-item {
+            min-width: auto;
+            width: 100%;
+          }
+          
+          .month-selection-section,
+          .vaccine-category-section,
+          .baby-counts-section,
+          .additional-vaccines-section {
+            margin-bottom: 20px;
           }
 
           .vaccine-buttons-grid {
             grid-template-columns: 1fr;
-          }
-
-          .vaccine-button {
-            width: 100%;
+            gap: 12px;
           }
         }
       `}</style>

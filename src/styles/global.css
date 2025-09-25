@@ -10,7 +10,6 @@
   --text-secondary: #64748b;
 }
 
-/*nnnnnnnnnnnnnnnnn*/
 
 
         .alerts-notifications-container {
@@ -243,13 +242,9 @@
 /* Patient =======================*/
 /* Patient Search Component Styles */
 .patient-search-container {
-  width: 100%;
-  min-height: 864px;
-  padding: 111px 78px 0 78px;
   box-sizing: border-box;
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   background-color: #F0F9FF;
-  margin: 0 auto;
 }
 
 .patient-search-title {
@@ -296,10 +291,10 @@
 }
 
 .vaccine-grid {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(4, 215px);
   grid-template-rows: repeat(2, 49px);
-  gap: 10px 0px;
+  gap: 10px 0px ;
   margin-bottom: 16px;
 }
 
@@ -426,9 +421,7 @@
 
 /* Responsive Design */
 @media (max-width: 991px) {
-  .patient-search-container {
-    padding: 60px 40px 0 40px;
-  }
+  
 
   .vaccine-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -452,10 +445,7 @@
 }
 
 @media (max-width: 768px) {
-  .patient-search-container {
-    padding: 40px 25px 0 25px;
-    min-height: auto;
-  }
+  
 
   .patient-search-title {
     font-size: 18px;
@@ -523,9 +513,7 @@
 }
 
 @media (max-width: 640px) {
-  .patient-search-container {
-    padding: 30px 20px 40px 20px;
-  }
+  
 
   .patient-search-title {
     font-size: 16px;
@@ -582,9 +570,7 @@
 }
 
 @media (max-width: 480px) {
-  .patient-search-container {
-    padding: 20px 16px 30px 16px;
-  }
+ 
 
   .patient-search-title {
     font-size: 18px;
@@ -655,9 +641,7 @@
 }
 
 @media (max-width: 360px) {
-  .patient-search-container {
-    padding: 16px 12px 25px 12px;
-  }
+ 
 
   .vaccine-button {
     height: 56px;
@@ -3860,5 +3844,205 @@ html {
 
   .carousel-controls {
     display: none;
+  }
+}
+/* Header Styles */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-logo {
+  height: 40px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.header-logo:hover {
+  opacity: 0.8;
+}
+
+/* Navigation Styles */
+.header-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000000;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+  color: #1f2937;
+  background-color: #71cde9;
+}
+
+/* Header Buttons Container */
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Existing button styles */
+.vaccination-button,
+.login-button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vaccination-button {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.vaccination-button:hover {
+  background-color: #e5e7eb;
+}
+
+.login-button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.login-button:hover {
+  background-color: #2563eb;
+}
+
+/* Profile Dropdown Styles */
+.profile-dropdown-container {
+  position: relative;
+}
+
+.profile-icon-button {
+  background: none;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.profile-icon-button:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  background-color: #f0f9ff;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  min-width: 160px;
+  padding: 0.5rem 0;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: #374151;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f3f4f6;
+}
+
+.dropdown-item.logout {
+  color: #dc2626;
+}
+
+.dropdown-item.logout:hover {
+  background-color: #fef2f2;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 0.5rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 1rem;
+  }
+  
+  .header-nav {
+    display: none; /* Hide navigation on mobile, you might want to implement a mobile menu */
+  }
+  
+  .nav-button {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .vaccination-button,
+  .login-button {
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-buttons {
+    gap: 0.5rem;
+  }
+  
+  .vaccination-text,
+  .login-text {
+    display: none;
+  }
+  
+  .vaccination-button,
+  .login-button {
+    padding: 0.5rem;
+    min-width: 40px;
   }
 }

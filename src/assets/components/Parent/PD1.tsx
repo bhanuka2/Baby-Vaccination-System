@@ -1,10 +1,13 @@
 import React from 'react';
 import './PD1.css';
+import { useNavigate } from 'react-router-dom';
 
 const PD1: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="pd1-container"  style={{marginTop: '-900px' , marginLeft: '200px', width: '100%', maxWidth: '1090px', padding: '20px', fontFamily: 'Inter, sans-serif'}}>
-      <div className="pd1-content" style={{ width: '1090px'}}>
+    <div className="pd1-container parent-page">
+      <div className="pd1-content">
         <div className="pd1-background">
           <img
             src="https://api.builder.io/api/v1/image/assets/TEMP/dab0f0ef456b0c0466b933d7dc191368ef7452f1?placeholderIfAbsent=true"
@@ -33,7 +36,12 @@ const PD1: React.FC = () => {
                 <h3 className="card-title">Register New Baby</h3>
                 <p className="card-description">Add a new baby to your account</p>
                 <p className="card-description">and start tracking their health</p>
-                <button className="action-button">
+                <button
+                  type="button"
+                  className="action-button"
+                  aria-label="Register new baby"
+                  onClick={() => navigate('/parent/vaccination-records')}
+                >
                   <img
                     src="https://api.builder.io/api/v1/image/assets/TEMP/34124b1994b145e3a61659db737f51dd8cb1cf3b?placeholderIfAbsent=true"
                     alt="Button background"
@@ -56,7 +64,12 @@ const PD1: React.FC = () => {
                 <h3 className="card-title">Report Symptoms</h3>
                 <p className="card-description">Quickly report any symptoms</p>
                 <p className="card-description">or health concerns</p>
-                <button className="action-button">
+                <button
+                  type="button"
+                  className="action-button"
+                  aria-label="Report symptoms"
+                  onClick={() => navigate('/parent/report-symptoms')}
+                >
                   <img
                     src="https://api.builder.io/api/v1/image/assets/TEMP/0620087a48f080bca780eb96b6dd1f13c8965ed3?placeholderIfAbsent=true"
                     alt="Button background"
@@ -89,7 +102,12 @@ const PD1: React.FC = () => {
                 </div>
                 <p className="card-description">View important notifications</p>
                 <p className="card-description">and reminders</p>
-                <button className="action-button">
+                <button
+                  type="button"
+                  className="action-button"
+                  aria-label="View alerts and reminders"
+                  onClick={() => navigate('/parent/reminders')}
+                >
                   <img
                     src="https://api.builder.io/api/v1/image/assets/TEMP/0620087a48f080bca780eb96b6dd1f13c8965ed3?placeholderIfAbsent=true"
                     alt="Button background"
@@ -198,6 +216,20 @@ const PD1: React.FC = () => {
           </div>
         </section>
       </div>
+
+      <style>{`
+        .parent-page {
+          width: 100%;
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 16px;
+          box-sizing: border-box;
+          font-family: Inter, sans-serif;
+        }
+        .pd1-content {
+          width: 100%;
+        }
+      `}</style>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './assets/components/Home/Home';
 import SignIn from './assets/components/login/SignIn';
 import SignUp from './assets/components/login/SignUp';
@@ -24,38 +24,40 @@ function App() {
     <>
       <Router>
         <Routes>
+          {/* Authentication Routes */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/pa-create" element={<PACreate />} />
-          <Route
-            path="*"
-            element={
-              <>
-                <Header />
-                <Routes>
-                  <Route path="/" element={<AACreate />} />
-                  <Route path="/customer-interface" element={<CustomerInterface1 />} />
-                  {/* Admin Dashboard with nested routes */}
-                  <Route path="/admin/*" element={<AdminDashboard />}>
-                    <Route index element={<AD2 />} />
-                    <Route path="dashboard" element={<AD2 />} />
-                    <Route path="manage-records" element={<AD1 />} />
-                    <Route path="patients-search" element={<PatientSearch />} />
-                    <Route path="vaccination-programs" element={<AD3 />} />
-                  </Route>
-                  {/* Parent Dashboard with nested routes */}
-                  <Route path="/parent/*" element={<ParentDashboard />}>
-                    <Route index element={<PD1 />} />
-                    <Route path="dashboard" element={<PD1 />} />
-                    <Route path="vaccination-records" element={<PD2 />} />
-                    <Route path="reminders" element={<PD3 />} />
-                    <Route path="profile" element={<PD5 />} />
-                  </Route>
-                  {/* ...other routes... */}
-                </Routes>
-              </>
-            }
-          />
+          <Route path="/aa-create" element={<AACreate />} />
+          
+          {/* Redirect from root to signin */}
+          <Route path="/" element={<Navigate to="/signin" />} />
+          
+          {/* Routes with Header */}
+          <Route path="/home" element={<><HomeUI /></>} />
+          <Route path="/customer-interface" element={<><Header /><CustomerInterface1 /></>} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<><Header /><AdminDashboard /></>}>
+            <Route index element={<Navigate to="/admin/dashboard" />} />
+            <Route path="dashboard" element={<AD2 />} />
+            <Route path="manage-records" element={<AD1 />} />
+            <Route path="patients-search" element={<PatientSearch />} />
+            <Route path="vaccination-programs" element={<AD3 />} />
+          </Route>
+          
+          {/* Parent Routes */}
+          <Route path="/parent" element={<><Header /><ParentDashboard /></>}>
+            <Route index element={<Navigate to="/parent/dashboard" />} />
+            <Route path="dashboard" element={<PD1 />} />
+            <Route path="vaccination-records" element={<PD2 />} />
+            <Route path="reminders" element={<PD3 />} />
+            <Route path="report-symptoms" element={<PD5 />} />
+            <Route path="profile" element={<PD5 />} />
+          </Route>
+          
+          {/* Catch-all route - redirect to signin */}
+          <Route path="*" element={<Navigate to="/signin" />} />
         </Routes>
       </Router>
     </>

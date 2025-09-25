@@ -264,9 +264,7 @@
 
 .login-link-text {
   color: #213FD5;
-  text-decoration: underline;
   font: 400 14px Arial, -apple-system, Roboto, Helvetica, sans-serif;
-  transition: color 0.2s ease;
 }
 
 .login-link-text:hover {

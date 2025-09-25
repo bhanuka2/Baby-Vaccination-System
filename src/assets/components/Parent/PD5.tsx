@@ -128,7 +128,7 @@ const PD5: React.FC = () => {
   };
 
   return (
-    <div className="symptom-report-container"  style={{marginTop: '-860px' , marginLeft: '250px',width:'1090px'}}>
+    <div className="symptom-report-container parent-page">
       <div className="symptom-report-content">
         <div className="report-header">
           <h1 className="report-title">Report Symptoms</h1>
@@ -306,6 +306,17 @@ const PD5: React.FC = () => {
           </div>
         </form>
       </div>
+
+      <style>{`
+        .parent-page {
+          width: 100%;
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 16px;
+          box-sizing: border-box;
+          font-family: Inter, sans-serif;
+        }
+      `}</style>
     </div>
   );
 };

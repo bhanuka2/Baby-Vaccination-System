@@ -14,20 +14,12 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call and handle role-based navigation
     try {
-      if (email === 'admin@gmail.com' && password === 'admin') {
-        navigate('/admin');
-        return;
-      }
-      if (email === 'parent@gmail.com' && password === 'parent') {
-        navigate('/parent');
-        return;
-      }
       console.log('Login attempt:', { email, password, rememberMe });
       // Add your authentication logic here
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated delay
-      alert('Login functionality would be implemented here');
+      
+      // Navigate based on role
     } catch (error) {
       console.error('Login error:', error);
     } finally {
@@ -88,7 +80,7 @@ const Login = () => {
                   id="password"
                   type="password"
                   className="input-field"
-                  placeholder="••••••••"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -121,6 +113,7 @@ const Login = () => {
               className="login-button" 
               disabled={isLoading} 
               style={{marginTop: '30px',width: '500px'}}
+              onClick={() => navigate('/parent')}
             >
               {isLoading ? 'Signing in...' : 'Log in'}
             </button>
@@ -136,8 +129,6 @@ const Login = () => {
               Sign up
             </button>
           </div>
-
-           
         </div>
       </div>
       

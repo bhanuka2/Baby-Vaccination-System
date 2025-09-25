@@ -9,13 +9,23 @@ interface VaccineButtonProps {
 }
 
 const VaccineButton: React.FC<VaccineButtonProps> = ({ name, isSelected, isGiven = false, onClick }) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
   return (
-    <div 
+    <button
+      type="button"
       className={`vaccine-button ${isSelected ? 'selected' : ''} ${isGiven ? 'given' : ''}`}
       onClick={onClick}
+      onKeyDown={onKeyDown}
+      aria-pressed={isSelected}
+      aria-label={`Vaccine ${name}${isGiven ? ' (given)' : ''}`}
     >
       <span className="vaccine-text">{name}</span>
-    </div>
+    </button>
   );
 };
 
@@ -26,18 +36,28 @@ interface CheckboxProps {
 }
 
 const CustomCheckbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onChange(!checked);
+    }
+  };
   return (
     <div className="flex items-start gap-5">
-      <div 
+      <div
         className={`checkbox-container ${checked ? 'checked' : ''}`}
+        role="checkbox"
+        aria-checked={checked}
+        tabIndex={0}
         onClick={() => onChange(!checked)}
+        onKeyDown={onKeyDown}
       >
         {checked && (
-          <svg 
-            width="16" 
-            height="11" 
-            viewBox="0 0 16 11" 
-            fill="none" 
+          <svg
+            width="16"
+            height="11"
+            viewBox="0 0 16 11"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className="checkbox-check"
           >
@@ -45,7 +65,10 @@ const CustomCheckbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) =
           </svg>
         )}
       </div>
-      <label className={`checkbox-label ${checked ? 'checked' : ''}`}>
+      <label
+        className={`checkbox-label ${checked ? 'checked' : ''}`}
+        onClick={() => onChange(!checked)}
+      >
         {label}
       </label>
     </div>
@@ -53,7 +76,7 @@ const CustomCheckbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) =
 };
 
 const PatientSearch: React.FC = () => {
-  const [patientName, setPatientName] = useState('Kusal Mendis');
+  const [patientName, setPatientName] = useState('');
   const [babyOneVaccines, setBabyOneVaccines] = useState({
     BCG: false,
     OPV: false,
@@ -122,7 +145,7 @@ const PatientSearch: React.FC = () => {
   const sideEffectsList = ['Irritability/Fussiness', 'Loss of appetite', 'Lethargy', 'Vomiting', 'Diarrhea', 'Rash'];
 
   return (
-    <div className="patient-search-container" style={{marginTop: '-700px' , marginLeft: '250px'}}>
+    <div className="patient-search-container" style={{ maxWidth: 1100, margin: '0 auto', padding: 16 }}>
       <h1 className="patient-search-title">
         Patient Search
       </h1>
@@ -143,7 +166,7 @@ const PatientSearch: React.FC = () => {
       <div className="section-title">
         Baby one *
       </div>
-      
+
       <div className="vaccine-grid">
         {vaccines.map((vaccine) => (
           <VaccineButton

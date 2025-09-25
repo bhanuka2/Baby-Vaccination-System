@@ -2,7 +2,7 @@ import React from 'react';
 
 const PD3: React.FC = () => {
   return (
-    <div className="alerts-notifications-container" style={{marginTop: '-860px' , marginLeft: '250px',width:'1290px'}}>
+    <div className="alerts-notifications-container">
       <div className="alerts-content">
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/b448a6754f35e39a6232b7acedf421a49fff034d?placeholderIfAbsent=true"
@@ -48,7 +48,11 @@ const PD3: React.FC = () => {
 
       <style >{`
         .alerts-notifications-container {
-          max-width: 894px;
+          width: 100%;
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 16px;
+          box-sizing: border-box;
           color: rgba(126, 90, 90, 1);
           font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
           font-weight: 700;
@@ -63,7 +67,8 @@ const PD3: React.FC = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 23px 67px 52px;
+          padding: 23px 24px 52px;
+          box-sizing: border-box;
         }
 
         .alerts-background {
