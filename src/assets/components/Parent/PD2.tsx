@@ -1,18 +1,35 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const PD2: React.FC = () => {
   const [formData, setFormData] = useState({
-    babyName: '',
+    name: '',
     gender: 'male',
-    dateOfBirth: '',
-    birthWeight: '',
-    birthHeight: '',
-    hospitalName: '',
-    pediatricianName: '',
-    emergencyContact: ''
+    DOB: '',
+    ageMonths: '',
+    weight: '',
+    height: '',
+    birthPlace: '',
+    predicationName: '',
+    contact: '',
+    Vaccines: [] as string[]
   });
 
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [isVaccineDropdownOpen, setIsVaccineDropdownOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const availableVaccines = [
+    'BCG',
+    'OPV', 
+    'Pentavalent',
+    'PCV',
+    'Rotavirus',
+    'MMR',
+    'DPT_Booster'
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,12 +57,32 @@ const PD2: React.FC = () => {
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
     
-    if (!formData.babyName.trim()) {
-      newErrors.babyName = "Baby's name is required";
+    if (!formData.name.trim()) {
+      newErrors.name = "Baby's name is required";
     }
     
-    if (!formData.dateOfBirth.trim()) {
-      newErrors.dateOfBirth = "Date of birth is required";
+    if (!formData.DOB.trim()) {
+      newErrors.DOB = "Date of birth is required";
+    }
+
+    if (!formData.gender) {
+      newErrors.gender = "Gender is required";
+    }
+
+    if (formData.ageMonths && (isNaN(Number(formData.ageMonths)) || Number(formData.ageMonths) < 0 || Number(formData.ageMonths) > 60)) {
+      newErrors.ageMonths = "Please enter a valid age in months (0-60)";
+    }
+
+    if (formData.weight && (isNaN(Number(formData.weight)) || Number(formData.weight) <= 0)) {
+      newErrors.weight = "Please enter a valid weight";
+    }
+
+    if (formData.height && (isNaN(Number(formData.height)) || Number(formData.height) <= 0)) {
+      newErrors.height = "Please enter a valid height";
+    }
+
+    if (formData.contact && (isNaN(Number(formData.contact)) || formData.contact.length < 10)) {
+      newErrors.contact = "Please enter a valid contact number";
     }
     
     setErrors(newErrors);
@@ -54,22 +91,105 @@ const PD2: React.FC = () => {
 
   const handleSaveDraft = () => {
     console.log('Saving draft:', formData);
+    alert('Draft saved successfully!');
   };
 
-  const handleContinue = () => {
-    if (validateForm()) {
-      console.log('Continuing with:', formData);
+  const handleContinue = async () => {
+    if (!validateForm()) {
+      return;
     }
+
+    setIsLoading(true);
+    setErrorMessage(null);
+    setSuccessMessage(null);
+
+    try {
+      // Prepare the payload according to backend DTO
+      const payload = {
+        name: formData.name.trim(),
+        ageMonths: formData.ageMonths ? parseInt(formData.ageMonths) : null,
+        Vaccines: formData.Vaccines, // Array of selected vaccines
+        DOB: formData.DOB, // Date string in YYYY-MM-DD format
+        gender: formData.gender,
+        weight: formData.weight ? parseInt(formData.weight) : null,
+        height: formData.height ? parseInt(formData.height) : null,
+        birthPlace: formData.birthPlace.trim() || null,
+        predicationName: formData.predicationName.trim() || null,
+        contact: formData.contact ? parseInt(formData.contact) : null
+      };
+
+      console.log('Sending payload to backend:', payload);
+
+      const response = await axios.post('http://localhost:8082/baby/add', payload, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000, // 10 second timeout
+      });
+
+      console.log('Baby registration successful:', response.data);
+      setSuccessMessage('Baby registered successfully!');
+      
+      // Reset form after successful submission
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          gender: 'male',
+          DOB: '',
+          ageMonths: '',
+          weight: '',
+          height: '',
+          birthPlace: '',
+          predicationName: '',
+          contact: '',
+          Vaccines: []
+        });
+        setSuccessMessage(null);
+      }, 3000);
+
+    } catch (error: any) {
+      console.error('Baby registration error:', error);
+      
+      if (error.code === 'ECONNABORTED') {
+        setErrorMessage('Request timeout. Please check your connection and try again.');
+      } else if (error.response) {
+        const message = error.response.data?.message || error.response.data?.error || 'Registration failed. Please try again.';
+        setErrorMessage(`Registration failed: ${message}`);
+      } else if (error.request) {
+        setErrorMessage('Cannot connect to server. Please ensure the backend server is running on http://localhost:8082');
+      } else {
+        setErrorMessage('An unexpected error occurred. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleVaccineToggle = (vaccine: string) => {
+    setFormData(prev => ({
+      ...prev,
+      Vaccines: prev.Vaccines.includes(vaccine)
+        ? prev.Vaccines.filter(v => v !== vaccine)
+        : [...prev.Vaccines, vaccine]
+    }));
+  };
+
+  const handleRemoveVaccine = (vaccine: string) => {
+    setFormData(prev => ({
+      ...prev,
+      Vaccines: prev.Vaccines.filter(v => v !== vaccine)
+    }));
   };
 
   return (
     <>
-      <div className="form-container" >
+      <div className="form-container">
         <div className="form-wrapper">
           <div className="form-card">
             {/* Header Section */}
-            <div className="form-header" >
-              <h1 className="form-title" style={{textAlign:"center",width:"1200px"}} >
+            <div className="form-header">
+              <h1 className="form-title" style={{textAlign:"center",width:"1200px"}}>
                 Register New Baby
               </h1>
               <p className="form-subtitle" style={{textAlign:"center",width:"1200px"}}>
@@ -78,23 +198,18 @@ const PD2: React.FC = () => {
             </div>
 
             <div className="form-content">
-              {/* Step Indicator */}
-              <div className="step-indicator">
-                <h2 className="step-title">
-                  Step 1 of 3: Basic Information
-                </h2>
-                {/* Progress Bar */}
-                <div className="progress-container">
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{width: '33.33%'}}></div>
-                  </div>
-                  <div className="progress-labels">
-                    <span className="progress-label active">Basic Info</span>
-                    <span className="progress-label">Medical Info</span>
-                    <span className="progress-label">Review</span>
-                  </div>
+              {/* Success/Error Messages */}
+              {successMessage && (
+                <div className="message-container success-message">
+                  <p>{successMessage}</p>
                 </div>
-              </div>
+              )}
+              
+              {errorMessage && (
+                <div className="message-container error-message">
+                  <p>{errorMessage}</p>
+                </div>
+              )}
 
               {/* Form Content */}
               <div className="form-fields">
@@ -102,38 +217,38 @@ const PD2: React.FC = () => {
                 <div className="form-row-main">
                   {/* Baby Name */}
                   <div className="form-group-large">
-                    <label htmlFor="babyName" className="form-label">
+                    <label htmlFor="name" className="form-label">
                       Baby's Full Name <span className="required">*</span>
                     </label>
                     <input
                       type="text"
-                      id="babyName"
-                      name="babyName"
-                      value={formData.babyName}
+                      id="name"
+                      name="name"
+                      value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Enter baby's full name"
-                      className={`form-input ${errors.babyName ? 'form-input-error' : ''}`}
+                      className={`form-input ${errors.name ? 'form-input-error' : ''}`}
                     />
-                    {errors.babyName && (
-                      <p className="error-message">{errors.babyName}</p>
+                    {errors.name && (
+                      <p className="error-message">{errors.name}</p>
                     )}
                   </div>
 
                   {/* Date of Birth */}
                   <div className="form-group">
-                    <label htmlFor="dateOfBirth" className="form-label">
+                    <label htmlFor="DOB" className="form-label">
                       Date of Birth <span className="required">*</span>
                     </label>
                     <input
                       type="date"
-                      id="dateOfBirth"
-                      name="dateOfBirth"
-                      value={formData.dateOfBirth}
+                      id="DOB"
+                      name="DOB"
+                      value={formData.DOB}
                       onChange={handleInputChange}
-                      className={`form-input ${errors.dateOfBirth ? 'form-input-error' : ''}`}
+                      className={`form-input ${errors.DOB ? 'form-input-error' : ''}`}
                     />
-                    {errors.dateOfBirth && (
-                      <p className="error-message">{errors.dateOfBirth}</p>
+                    {errors.DOB && (
+                      <p className="error-message">{errors.DOB}</p>
                     )}
                   </div>
                 </div>
@@ -185,91 +300,193 @@ const PD2: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Age Section */}
+                <div className="form-group">
+                  <label htmlFor="ageMonths" className="form-label">
+                    Age (months)
+                  </label>
+                  <input
+                    type="number"
+                    id="ageMonths"
+                    name="ageMonths"
+                    min="0"
+                    max="60"
+                    value={formData.ageMonths}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 6"
+                    className={`form-input age-input ${errors.ageMonths ? 'form-input-error' : ''}`}
+                  />
+                  {errors.ageMonths && (
+                    <p className="error-message">{errors.ageMonths}</p>
+                  )}
+                  <p className="input-hint">Enter baby's age in months (0-60)</p>
+                </div>
+
                 {/* Second Row - Birth Weight and Height */}
                 <div className="form-row">
                   {/* Birth Weight */}
                   <div className="form-group">
-                    <label htmlFor="birthWeight" className="form-label">
-                      Birth Weight (kg)
+                    <label htmlFor="weight" className="form-label">
+                      Weight (kg)
                     </label>
                     <input
                       type="number"
-                      step="0.1"
-                      id="birthWeight"
-                      name="birthWeight"
-                      value={formData.birthWeight}
+                      step="1"
+                      id="weight"
+                      name="weight"
+                      value={formData.weight}
                       onChange={handleInputChange}
-                      placeholder="e.g., 3.2"
-                      className="form-input"
+                      placeholder="e.g., 7"
+                      className={`form-input ${errors.weight ? 'form-input-error' : ''}`}
                     />
+                    {errors.weight && (
+                      <p className="error-message">{errors.weight}</p>
+                    )}
                   </div>
 
                   {/* Birth Height */}
                   <div className="form-group">
-                    <label htmlFor="birthHeight" className="form-label">
-                      Birth Height (cm)
+                    <label htmlFor="height" className="form-label">
+                      Height (cm)
                     </label>
                     <input
                       type="number"
-                      id="birthHeight"
-                      name="birthHeight"
-                      value={formData.birthHeight}
+                      id="height"
+                      name="height"
+                      value={formData.height}
                       onChange={handleInputChange}
-                      placeholder="e.g., 50"
-                      className="form-input"
+                      placeholder="e.g., 65"
+                      className={`form-input ${errors.height ? 'form-input-error' : ''}`}
                     />
+                    {errors.height && (
+                      <p className="error-message">{errors.height}</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Hospital/Birth Place */}
+                {/* Birth Place */}
                 <div className="form-group">
-                  <label htmlFor="hospitalName" className="form-label">
-                    Hospital/Birth Place
+                  <label htmlFor="birthPlace" className="form-label">
+                    Birth Place
                   </label>
                   <input
                     type="text"
-                    id="hospitalName"
-                    name="hospitalName"
-                    value={formData.hospitalName}
+                    id="birthPlace"
+                    name="birthPlace"
+                    value={formData.birthPlace}
                     onChange={handleInputChange}
-                    placeholder="Enter hospital or birth place name"
+                    placeholder="Enter birth place"
                     className="form-input"
                   />
                 </div>
 
-                {/* Third Row - Pediatrician and Emergency Contact */}
+                {/* Third Row - Pediatrician and Contact */}
                 <div className="form-row">
                   {/* Pediatrician Name */}
                   <div className="form-group">
-                    <label htmlFor="pediatricianName" className="form-label">
+                    <label htmlFor="predicationName" className="form-label">
                       Pediatrician's Name
                     </label>
                     <input
                       type="text"
-                      id="pediatricianName"
-                      name="pediatricianName"
-                      value={formData.pediatricianName}
+                      id="predicationName"
+                      name="predicationName"
+                      value={formData.predicationName}
                       onChange={handleInputChange}
                       placeholder="Dr. name (optional)"
                       className="form-input"
                     />
                   </div>
 
-                  {/* Emergency Contact */}
+                  {/* Contact */}
                   <div className="form-group">
-                    <label htmlFor="emergencyContact" className="form-label">
-                      Emergency Contact
+                    <label htmlFor="contact" className="form-label">
+                      Contact Number
                     </label>
                     <input
                       type="tel"
-                      id="emergencyContact"
-                      name="emergencyContact"
-                      value={formData.emergencyContact}
+                      id="contact"
+                      name="contact"
+                      value={formData.contact}
                       onChange={handleInputChange}
                       placeholder="Phone number"
-                      className="form-input"
+                      className={`form-input ${errors.contact ? 'form-input-error' : ''}`}
                     />
+                    {errors.contact && (
+                      <p className="error-message">{errors.contact}</p>
+                    )}
                   </div>
+                </div>
+
+                {/* Vaccines Selection Section */}
+                <div className="form-group">
+                  <label className="form-label">
+                    Select Vaccines
+                  </label>
+                  
+                  {/* Vaccine Dropdown */}
+                  <div className="vaccine-dropdown-container">
+                    <button
+                      type="button"
+                      className="vaccine-dropdown-trigger"
+                      onClick={() => setIsVaccineDropdownOpen(!isVaccineDropdownOpen)}
+                    >
+                      <span>Add Vaccines</span>
+                      <svg 
+                        className={`dropdown-arrow ${isVaccineDropdownOpen ? 'open' : ''}`}
+                        width="12" 
+                        height="8" 
+                        viewBox="0 0 12 8"
+                      >
+                        <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                    </button>
+
+                    {isVaccineDropdownOpen && (
+                      <div className="vaccine-dropdown-menu">
+                        {availableVaccines.map((vaccine) => (
+                          <div
+                            key={vaccine}
+                            className={`vaccine-dropdown-item ${
+                              formData.Vaccines.includes(vaccine) ? 'selected' : ''
+                            }`}
+                            onClick={() => handleVaccineToggle(vaccine)}
+                          >
+                            <div className="vaccine-checkbox">
+                              {formData.Vaccines.includes(vaccine) && (
+                                <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+                                  <path d="M1 4L4.5 7.5L11 1" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                                </svg>
+                              )}
+                            </div>
+                            <span>{vaccine}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Selected Vaccines Display */}
+                  {formData.Vaccines.length > 0 && (
+                    <div className="selected-vaccines-container">
+                      <div className="selected-vaccines-label">Selected Vaccines:</div>
+                      <div className="selected-vaccines-list">
+                        {formData.Vaccines.map((vaccine) => (
+                          <div key={vaccine} className="selected-vaccine-tag">
+                            <span>{vaccine}</span>
+                            <button
+                              type="button"
+                              className="remove-vaccine-btn"
+                              onClick={() => handleRemoveVaccine(vaccine)}
+                              aria-label={`Remove ${vaccine}`}
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Required Fields Note */}
@@ -280,16 +497,20 @@ const PD2: React.FC = () => {
                 {/* Action Buttons */}
                 <div className="form-actions">
                   <button
+                    type="button"
                     onClick={handleSaveDraft}
                     className="btn-secondary"
+                    disabled={isLoading}
                   >
                     Save Draft
                   </button>
                   <button
+                    type="button"
                     onClick={handleContinue}
                     className="btn-primary"
+                    disabled={isLoading}
                   >
-                    Continue
+                    {isLoading ? 'Registering...' : 'Register Baby'}
                   </button>
                 </div>
               </div>
@@ -578,6 +799,183 @@ const PD2: React.FC = () => {
           box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
         }
 
+        /* Vaccine Dropdown Styles */
+        .vaccine-dropdown-container {
+          position: relative;
+          margin-bottom: 16px;
+        }
+
+        .vaccine-dropdown-trigger {
+          width: 100%;
+          padding: 12px 16px;
+          border: 2px solid #d1d5db;
+          border-radius: 8px;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          font-size: 14px;
+          color: #374151;
+          transition: all 0.2s ease;
+        }
+
+        .vaccine-dropdown-trigger:hover {
+          border-color: #9ca3af;
+        }
+
+        .vaccine-dropdown-trigger:focus {
+          outline: none;
+          border-color: #06b6d4;
+          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .dropdown-arrow {
+          transition: transform 0.2s ease;
+          color: #6b7280;
+        }
+
+        .dropdown-arrow.open {
+          transform: rotate(180deg);
+        }
+
+        .vaccine-dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+          max-height: 200px;
+          overflow-y: auto;
+          margin-top: 4px;
+        }
+
+        .vaccine-dropdown-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 16px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+          border-bottom: 1px solid #f3f4f6;
+        }
+
+        .vaccine-dropdown-item:last-child {
+          border-bottom: none;
+        }
+
+        .vaccine-dropdown-item:hover {
+          background-color: #f9fafb;
+        }
+
+        .vaccine-dropdown-item.selected {
+          background-color: #ecfeff;
+          color: #0891b2;
+        }
+
+        .vaccine-checkbox {
+          width: 18px;
+          height: 18px;
+          border: 2px solid #d1d5db;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+        }
+
+        .vaccine-dropdown-item.selected .vaccine-checkbox {
+          background-color: #06b6d4;
+          border-color: #06b6d4;
+        }
+
+        /* Selected Vaccines Display */
+        .selected-vaccines-container {
+          margin-top: 16px;
+          padding: 16px;
+          background-color: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 8px;
+        }
+
+        .selected-vaccines-label {
+          font-size: 13px;
+          font-weight: 600;
+          color: #374151;
+          margin-bottom: 8px;
+        }
+
+        .selected-vaccines-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .selected-vaccine-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+          color: white;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+
+        .remove-vaccine-btn {
+          background: none;
+          border: none;
+          color: white;
+          cursor: pointer;
+          font-size: 16px;
+          line-height: 1;
+          padding: 0;
+          margin-left: 4px;
+          width: 16px;
+          height: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          transition: background-color 0.2s;
+        }
+
+        .remove-vaccine-btn:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Message Containers */
+        .message-container {
+          width: 100%;
+          padding: 12px 16px;
+          margin-bottom: 20px;
+          border-radius: 8px;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .error-message {
+          background-color: rgba(239, 68, 68, 0.1);
+          border: 1px solid #EF4444;
+          color: #DC2626;
+        }
+
+        .success-message {
+          background-color: rgba(34, 197, 94, 0.1);
+          border: 1px solid #22C55E;
+          color: #16A34A;
+        }
+
+        .message-container p {
+          margin: 0;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
           .form-container {
@@ -617,6 +1015,19 @@ const PD2: React.FC = () => {
             width: 100%;
             padding: 14px 24px;
           }
+
+          .vaccine-dropdown-menu {
+            max-height: 150px;
+          }
+
+          .selected-vaccines-list {
+            gap: 6px;
+          }
+
+          .selected-vaccine-tag {
+            font-size: 11px;
+            padding: 4px 8px;
+          }
         }
 
         @media (max-width: 480px) {
@@ -635,6 +1046,18 @@ const PD2: React.FC = () => {
           .form-subtitle {
             font-size: 13px;
           }
+        }
+
+        .age-input {
+          max-width: 200px;
+        }
+
+        .input-hint {
+          color: #6b7280;
+          font-size: 12px;
+          margin-top: 4px;
+          margin-bottom: 0;
+          font-style: italic;
         }
       `}</style>
     </>

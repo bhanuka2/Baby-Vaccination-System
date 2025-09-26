@@ -17,7 +17,8 @@ function AdminDashboard() {
         borderRight: "1px solid #e0e0e0",
         padding: "20px 0",
         position: "fixed",
-        height: "100%",
+        height: "calc(100vh - 80px)",
+        top: "80px",
         boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
         zIndex: 10
       }}>
@@ -130,7 +131,9 @@ function AdminDashboard() {
       <div className="admin-content" style={{
         marginLeft: "220px",
         width: "calc(100% - 220px)",
-        padding: "15px"
+        padding: "15px",
+        paddingTop: "20px",
+        minHeight: "calc(100vh - 80px)"
       }}>
         {/* Redirect /admin to /admin/dashboard */}
         {isExactAdminPath && <Navigate to="/admin/dashboard" replace />}

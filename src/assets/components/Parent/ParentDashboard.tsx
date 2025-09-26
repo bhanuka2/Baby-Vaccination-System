@@ -8,16 +8,17 @@ const ParentDashboard: React.FC = () => {
   const isExactParentPath = location.pathname === "/parent";
 
   return (
-    <div className="flex flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-row min-h-screen" style={{ backgroundColor: '#f8fafc' }}>
       {/* Sidebar */}
       <div className="parent-sidebar" style={{
         width: "220px",
-        backgroundColor: "#f0f7fa", 
-        borderRight: "1px solid #e0e0e0",
+        backgroundColor: "#ffffff", 
+        borderRight: "1px solid #e2e8f0",
         padding: "20px 0",
         position: "fixed",
-        height: "100%",
-        boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+        height: "calc(100vh - 80px)",
+        top: "80px",
+        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
         zIndex: 10
       }}>
         <div className="parent-sidebar-wrapper" style={{
@@ -101,6 +102,31 @@ const ParentDashboard: React.FC = () => {
           </Link>
           
           <Link
+            to="register-baby"
+            className={`parent-nav-item${isActive("register-baby") ? " parent-nav-active" : ""}`}
+            style={{
+              padding: "12px 15px",
+              borderRadius: "8px",
+              textDecoration: "none",
+              color: isActive("register-baby") ? "#06B6D4" : "#333",
+              backgroundColor: isActive("register-baby") ? "#E0F7FA" : "transparent",
+              fontWeight: isActive("register-baby") ? 700 : 400,
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              transition: "all 0.2s ease"
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M16 20v-2a4 4 0 0 0-8 0v2"></path>
+              <path d="M12 4v8"></path>
+              <path d="M8 8h8"></path>
+            </svg>
+            Register Baby
+          </Link>
+          
+          <Link
             to="report-symptoms"
             className={`parent-nav-item${isActive("report-symptoms") ? " parent-nav-active" : ""}`}
             style={{
@@ -151,7 +177,10 @@ const ParentDashboard: React.FC = () => {
       <div className="parent-content" style={{
         marginLeft: "220px",
         width: "calc(100% - 220px)",
-        padding: "15px"
+        padding: "15px",
+        paddingTop: "20px",
+        minHeight: "calc(100vh - 80px)",
+        backgroundColor: '#f8fafc'
       }}>
         {/* Redirect /parent to /parent/dashboard */}
         {isExactParentPath && <Navigate to="/parent/dashboard" replace />}

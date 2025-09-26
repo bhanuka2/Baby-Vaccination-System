@@ -13,18 +13,21 @@ import ParentDashboard from './assets/components/Parent/ParentDashboard';
 import PD1 from './assets/components/Parent/PD1';
 import PD2 from './assets/components/Parent/PD2';
 import PD3 from './assets/components/Parent/PD3';
+import PD4 from './assets/components/Parent/PD4';
 import PD5 from './assets/components/Parent/PD5';
 import Header from './assets/components/Common/Header.tsx'; 
 import HomeUI from './assets/components/Home/HomeUI.tsx';
 import PACreate from './assets/components/login/PACreate';
 import AACreate from './assets/components/login/AACreate.tsx';
+import Footer from './assets/components/Common/Footer.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 function App() {
   return (
-    <>
-      <Router>
+    <Router>
+      <div className="flex flex-col min-h-screen overflow-x-hidden">
         <Routes>
-          {/* Authentication Routes */}
+          {/* Authentication Routes - Public */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/pa-create" element={<PACreate />} />
@@ -33,12 +36,34 @@ function App() {
           {/* Redirect from root to signin */}
           <Route path="/" element={<Navigate to="/signin" />} />
           
-          {/* Routes with Header */}
-          <Route path="/home" element={<><HomeUI /></>} />
-          <Route path="/customer-interface" element={<><Header /><CustomerInterface1 /></>} />
+          {/* Public Routes with Header */}
+          <Route path="/home" element={
+            <div className="flex flex-col min-h-screen">
+              <HomeUI />
+            </div>
+          } />
+          <Route path="/customer-interface" element={
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <div className="flex-grow">
+                <CustomerInterface1 />
+              </div>
+              <Footer />
+            </div>
+          } />
           
-          {/* Admin Routes */}
-          <Route path="/admin" element={<><Header /><AdminDashboard /></>}>
+          {/* Admin Routes - Protected */}
+          <Route path="/admin" element={
+            <ProtectedRoute requiredUserType="admin">
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <div className="flex-grow">
+                  <AdminDashboard />
+                </div>
+                <Footer />
+              </div>
+            </ProtectedRoute>
+          }>
             <Route index element={<Navigate to="/admin/dashboard" />} />
             <Route path="dashboard" element={<AD2 />} />
             <Route path="manage-records" element={<AD1 />} />
@@ -46,12 +71,23 @@ function App() {
             <Route path="vaccination-programs" element={<AD3 />} />
           </Route>
           
-          {/* Parent Routes */}
-          <Route path="/parent" element={<><Header /><ParentDashboard /></>}>
+          {/* Parent Routes - Protected */}
+          <Route path="/parent" element={
+            <ProtectedRoute requiredUserType="customer">
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <div className="flex-grow">
+                  <ParentDashboard />
+                </div>
+                <Footer />
+              </div>
+            </ProtectedRoute>
+          }>
             <Route index element={<Navigate to="/parent/dashboard" />} />
             <Route path="dashboard" element={<PD1 />} />
             <Route path="vaccination-records" element={<PD2 />} />
             <Route path="reminders" element={<PD3 />} />
+            <Route path="register-baby" element={<PD4 />} />
             <Route path="report-symptoms" element={<PD5 />} />
             <Route path="profile" element={<PD5 />} />
           </Route>
@@ -59,8 +95,8 @@ function App() {
           {/* Catch-all route - redirect to signin */}
           <Route path="*" element={<Navigate to="/signin" />} />
         </Routes>
-      </Router>
-    </>
+      </div>
+    </Router>
   );
 }
 
