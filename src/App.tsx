@@ -13,6 +13,7 @@ import ParentDashboard from './assets/components/Parent/ParentDashboard';
 import PD1 from './assets/components/Parent/PD1';
 import PD2 from './assets/components/Parent/PD2';
 import PD3 from './assets/components/Parent/PD3';
+import PD4 from './assets/components/Parent/PD4';
 import PD5 from './assets/components/Parent/PD5';
 import Header from './assets/components/Common/Header.tsx'; 
 import HomeUI from './assets/components/Home/HomeUI.tsx';
@@ -81,6 +82,7 @@ function App() {
             <Route path="dashboard" element={<PD1 />} />
             <Route path="vaccination-records" element={<PD2 />} />
             <Route path="reminders" element={<PD3 />} />
+            <Route path="register-baby" element={<PD4 />} />
             <Route path="report-symptoms" element={<PD5 />} />
             <Route path="profile" element={<PD5 />} />
           </Route>
