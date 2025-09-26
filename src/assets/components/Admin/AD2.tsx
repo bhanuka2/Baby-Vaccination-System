@@ -1,6 +1,126 @@
 import * as React from "react";
+import axios from 'axios';
+
+interface Baby {
+  id: number;
+  name: string;
+  ageMonths: number;
+  Vaccines: any; // Based on your DTO structure
+  DOB: string;
+  gender: string;
+  weight?: number;
+  height?: number;
+  birthPlace?: string;
+  predicationName?: string;
+  contact?: number;
+}
 
 function AD2() {
+  const [babies, setBabies] = React.useState<Baby[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+
+  // Function to calculate age display from ageMonths
+  const displayAge = (ageMonths: number): string => {
+    if (!ageMonths || isNaN(ageMonths) || ageMonths < 0) {
+      return 'Unknown';
+    }
+    
+    if (ageMonths < 12) {
+      return `${ageMonths}m`;
+    } else {
+      const years = Math.floor(ageMonths / 12);
+      const remainingMonths = ageMonths % 12;
+      if (remainingMonths > 0) {
+        return `${years}y ${remainingMonths}m`;
+      }
+      return `${years}y`;
+    }
+  };
+
+  // Function to format date for display
+  const formatDate = (dateString: string): string => {
+    if (!dateString) return 'Unknown';
+    
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return 'Invalid date';
+      
+      return date.toLocaleDateString('en-US', { 
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } catch (error) {
+      return 'Invalid date';
+    }
+  };
+
+  // Function to determine health status based on age and vaccination
+  const getHealthStatus = (baby: Baby): { status: string; className: string } => {
+    // Simple logic - you can enhance this based on your requirements
+    if (baby.ageMonths > 0 && baby.ageMonths < 24) {
+      return { status: 'Healthy', className: 'status-healthy' };
+    } else if (baby.ageMonths >= 24) {
+      return { status: 'Review', className: 'status-review' };
+    }
+    return { status: 'Unknown', className: 'status-unknown' };
+  };
+
+  // Fetch babies from API
+  const fetchBabies = async () => {
+    setIsLoading(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await axios.get('http://localhost:8082/baby/getAll', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000, // 10 second timeout
+      });
+
+      console.log('Babies fetched successfully for admin dashboard:', response.data);
+      
+      // Process the response data
+      const processedBabies = response.data.map((baby: any) => ({
+        ...baby,
+        // Ensure ageMonths is a number
+        ageMonths: baby.ageMonths || baby.age_months || 0,
+        // Ensure other fields are properly formatted
+        DOB: baby.DOB || baby.dob || baby.dateOfBirth,
+        gender: baby.gender || 'unknown',
+        weight: baby.weight ? parseInt(baby.weight) : null,
+        height: baby.height ? parseInt(baby.height) : null,
+        contact: baby.contact ? baby.contact : null
+      }));
+
+      setBabies(processedBabies);
+
+    } catch (error: any) {
+      console.error('Error fetching babies for admin dashboard:', error);
+      
+      if (error.code === 'ECONNABORTED') {
+        setErrorMessage('Request timeout. Please check your connection.');
+      } else if (error.response) {
+        const message = error.response.data?.message || error.response.data?.error || 'Failed to fetch patient records.';
+        setErrorMessage(`Error: ${message}`);
+      } else if (error.request) {
+        setErrorMessage('Cannot connect to server. Please ensure the backend server is running.');
+      } else {
+        setErrorMessage('An unexpected error occurred while fetching patient records.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch babies on component mount
+  React.useEffect(() => {
+    fetchBabies();
+  }, []);
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
@@ -96,46 +216,73 @@ function AD2() {
           <div className="table-header-row">
             <div className="table-cell header-cell">Baby Name</div>
             <div className="table-cell header-cell">Age</div>
-            <div className="table-cell header-cell">Last Visit</div>
+            <div className="table-cell header-cell">Birth Date</div>
             <div className="table-cell header-cell">Status</div>
             <div className="table-cell header-cell">Actions</div>
           </div>
         </div>
         <div className="table-body">
-          <div className="table-row">
-            <div className="table-cell">Kavindi Fernando</div>
-            <div className="table-cell">8 months</div>
-            <div className="table-cell">Aug 10, 2024</div>
-            <div className="table-cell">
-              <span className="status-badge status-healthy">Healthy</span>
+          {isLoading ? (
+            <div className="loading-row">
+              <div className="loading-spinner-small"></div>
+              <span>Loading patient records...</span>
             </div>
-            <div className="table-cell">
-              <button className="action-button">View</button>
+          ) : errorMessage ? (
+            <div className="error-row">
+              <div className="error-content">
+                <span className="error-text">{errorMessage}</span>
+                <button className="retry-button-small" onClick={fetchBabies}>
+                  Retry
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="table-row">
-            <div className="table-cell">Sahan Wickrama</div>
-            <div className="table-cell">12 months</div>
-            <div className="table-cell">Aug 12, 2024</div>
-            <div className="table-cell">
-              <span className="status-badge status-review">Review</span>
+          ) : babies.length === 0 ? (
+            <div className="no-data-row">
+              <span>No patient records found</span>
             </div>
-            <div className="table-cell">
-              <button className="action-button">View</button>
-            </div>
-          </div>
-          <div className="table-row">
-            <div className="table-cell">Nimasha Perera</div>
-            <div className="table-cell">4 months</div>
-            <div className="table-cell">Aug 14, 2024</div>
-            <div className="table-cell">
-              <span className="status-badge status-healthy">Healthy</span>
-            </div>
-            <div className="table-cell">
-              <button className="action-button">View</button>
-            </div>
-          </div>
+          ) : (
+            babies.slice(0, 5).map((baby) => { // Show only first 5 records
+              const healthStatus = getHealthStatus(baby);
+              return (
+                <div key={baby.id} className="table-row">
+                  <div className="table-cell">
+                    <div className="patient-info">
+                      <div className="patient-name">{baby.name || 'Unknown Name'}</div>
+                      <div className="patient-gender">{baby.gender}</div>
+                    </div>
+                  </div>
+                  <div className="table-cell">{displayAge(baby.ageMonths)}</div>
+                  <div className="table-cell">{formatDate(baby.DOB)}</div>
+                  <div className="table-cell">
+                    <span className={`status-badge ${healthStatus.className}`}>
+                      {healthStatus.status}
+                    </span>
+                  </div>
+                  <div className="table-cell">
+                    <button 
+                      className="action-button"
+                      onClick={() => console.log('View baby details:', baby.id)}
+                    >
+                      View
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
+        
+        {/* Show total count if there are more records */}
+        {babies.length > 5 && (
+          <div className="table-footer">
+            <div className="records-summary">
+              Showing 5 of {babies.length} total records
+              <button className="view-all-button" onClick={() => console.log('View all records')}>
+                View All Records
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       <style >{`
@@ -480,6 +627,121 @@ function AD2() {
 
         .action-button:hover {
           background-color: #3a7bc8;
+        }
+
+        .patient-info {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .patient-name {
+          font-weight: 600;
+          color: #333;
+        }
+
+        .patient-gender {
+          font-size: 11px;
+          color: #666;
+          text-transform: capitalize;
+        }
+
+        .status-unknown {
+          background: #6B7280;
+        }
+
+        .loading-row {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          padding: 40px 20px;
+          color: #666;
+          font-size: 14px;
+        }
+
+        .loading-spinner-small {
+          width: 20px;
+          height: 20px;
+          border: 2px solid #e5e7eb;
+          border-top: 2px solid #4A90E2;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .error-row {
+          padding: 30px 20px;
+        }
+
+        .error-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .error-text {
+          color: #DC2626;
+          font-size: 14px;
+          text-align: center;
+        }
+
+        .retry-button-small {
+          background: #DC2626;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          padding: 6px 16px;
+          font-size: 12px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+        }
+
+        .retry-button-small:hover {
+          background: #B91C1C;
+        }
+
+        .no-data-row {
+          display: flex;
+          justify-content: center;
+          padding: 40px 20px;
+          color: #666;
+          font-size: 14px;
+          font-style: italic;
+        }
+
+        .table-footer {
+          padding: 16px 20px;
+          border-top: 1px solid #f0f0f0;
+          background: #F8F9FA;
+        }
+
+        .records-summary {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 13px;
+          color: #666;
+        }
+
+        .view-all-button {
+          background: #4A90E2;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          padding: 6px 16px;
+          font-size: 12px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+        }
+
+        .view-all-button:hover {
+          background: #3a7bc8;
         }
 
         @media (max-width: 1200px) {

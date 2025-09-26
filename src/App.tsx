@@ -20,13 +20,14 @@ import HomeUI from './assets/components/Home/HomeUI.tsx';
 import PACreate from './assets/components/login/PACreate';
 import AACreate from './assets/components/login/AACreate.tsx';
 import Footer from './assets/components/Common/Footer.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen overflow-x-hidden">
         <Routes>
-          {/* Authentication Routes */}
+          {/* Authentication Routes - Public */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/pa-create" element={<PACreate />} />
@@ -35,7 +36,7 @@ function App() {
           {/* Redirect from root to signin */}
           <Route path="/" element={<Navigate to="/signin" />} />
           
-          {/* Routes with Header */}
+          {/* Public Routes with Header */}
           <Route path="/home" element={
             <div className="flex flex-col min-h-screen">
               <HomeUI />
@@ -51,15 +52,17 @@ function App() {
             </div>
           } />
           
-          {/* Admin Routes */}
+          {/* Admin Routes - Protected */}
           <Route path="/admin" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <div className="flex-grow">
-                <AdminDashboard />
+            <ProtectedRoute requiredUserType="admin">
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <div className="flex-grow">
+                  <AdminDashboard />
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
+            </ProtectedRoute>
           }>
             <Route index element={<Navigate to="/admin/dashboard" />} />
             <Route path="dashboard" element={<AD2 />} />
@@ -68,15 +71,17 @@ function App() {
             <Route path="vaccination-programs" element={<AD3 />} />
           </Route>
           
-          {/* Parent Routes */}
+          {/* Parent Routes - Protected */}
           <Route path="/parent" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <div className="flex-grow">
-                <ParentDashboard />
+            <ProtectedRoute requiredUserType="customer">
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <div className="flex-grow">
+                  <ParentDashboard />
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
+            </ProtectedRoute>
           }>
             <Route index element={<Navigate to="/parent/dashboard" />} />
             <Route path="dashboard" element={<PD1 />} />

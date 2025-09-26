@@ -14,8 +14,33 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  const validateForm = () => {
+    if (!email.trim()) {
+      setErrorMessage('Email is required');
+      return false;
+    }
+    if (!password.trim()) {
+      setErrorMessage('Password is required');
+      return false;
+    }
+    if (!email.includes('@')) {
+      setErrorMessage('Please enter a valid email address');
+      return false;
+    }
+    if (password.length < 6) {
+      setErrorMessage('Password must be at least 6 characters long');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     setIsLoading(true);
     setErrorMessage(null);
     setSuccessMessage(null);
@@ -25,47 +50,81 @@ const Login = () => {
         ? 'http://localhost:8082/api/admin/login' 
         : 'http://localhost:8082/member/login';
 
+      console.log(`Attempting ${userType} login with:`, { email, apiUrl });
+
       const response = await axios.post(apiUrl, {
-        email,
-        password
+        email: email.trim(),
+        password: password.trim()
       }, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        timeout: 10000, // 10 second timeout
+        timeout: 15000, // 15 second timeout
       });
 
-      // Handle successful response
-      console.log('Login successful:', response.data);
-      setSuccessMessage(`${userType.charAt(0).toUpperCase() + userType.slice(1)} login successful!`);
-      
-      // Wait a moment to show success message before redirecting
-      setTimeout(() => {
-        if (userType === 'admin') {
-          navigate('/admin');
+      console.log('Login successful response:', response.data);
+
+      // Check if the response indicates success
+      if (response.status === 200 && response.data) {
+        // Store authentication data
+        if (rememberMe) {
+          localStorage.setItem('userToken', response.data.token || 'authenticated');
+          localStorage.setItem('userType', userType);
+          localStorage.setItem('userEmail', email);
         } else {
-          navigate('/parent');
+          sessionStorage.setItem('userToken', response.data.token || 'authenticated');
+          sessionStorage.setItem('userType', userType);
+          sessionStorage.setItem('userEmail', email);
         }
-      }, 1500);
+
+        setSuccessMessage(`${userType.charAt(0).toUpperCase() + userType.slice(1)} login successful! Redirecting...`);
+        
+        // Wait a moment to show success message before redirecting
+        setTimeout(() => {
+          if (userType === 'admin') {
+            navigate('/admin');
+          } else {
+            navigate('/parent');
+          }
+        }, 2000);
+
+      } else {
+        throw new Error('Invalid login response from server');
+      }
 
     } catch (error: any) {
       console.error('Login error:', error);
       
+      let errorMsg = 'Login failed. Please try again.';
+
       if (error.code === 'ECONNABORTED') {
-        setErrorMessage('Request timeout. Please check your connection and try again.');
+        errorMsg = 'Request timeout. Please check your connection and try again.';
       } else if (error.response) {
         // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        const message = error.response.data?.message || error.response.data?.error || 'Login failed. Please check your credentials.';
-        setErrorMessage(`${userType.charAt(0).toUpperCase() + userType.slice(1)} ${message}`);
+        const status = error.response.status;
+        
+        if (status === 401) {
+          errorMsg = 'Invalid email or password. Please check your credentials and try again.';
+        } else if (status === 404) {
+          errorMsg = `${userType.charAt(0).toUpperCase() + userType.slice(1)} account not found. Please sign up first or check your user type selection.`;
+        } else if (status === 403) {
+          errorMsg = 'Account access denied. Please contact administrator.';
+        } else if (status >= 500) {
+          errorMsg = 'Server error. Please try again later.';
+        } else {
+          const message = error.response.data?.message || error.response.data?.error;
+          if (message) {
+            errorMsg = message;
+          }
+        }
       } else if (error.request) {
-        // The request was made but no response was received
-        setErrorMessage('Cannot connect to server. Please ensure the backend server is running on http://localhost:8082');
-      } else {
-        // Something happened in setting up the request
-        setErrorMessage('An unexpected error occurred. Please try again.');
+        errorMsg = 'Cannot connect to server. Please ensure the backend server is running on http://localhost:8082';
+      } else if (error.message) {
+        errorMsg = error.message;
       }
+
+      setErrorMessage(errorMsg);
     } finally {
       setIsLoading(false);
     }
@@ -74,6 +133,10 @@ const Login = () => {
   const handleForgotPassword = (e: MouseEvent) => {
     e.preventDefault();
     alert('Forgot password functionality would be implemented here');
+  };
+
+  const handleSignUpRedirect = () => {
+    navigate('/signup');
   };
 
   return (
@@ -105,14 +168,22 @@ const Login = () => {
             <button
               type="button"
               className={`user-type-btn ${userType === 'customer' ? 'active' : ''}`}
-              onClick={() => setUserType('customer')}
+              onClick={() => {
+                setUserType('customer');
+                setErrorMessage(null);
+                setSuccessMessage(null);
+              }}
             >
               Customer
             </button>
             <button
               type="button"
               className={`user-type-btn ${userType === 'admin' ? 'active' : ''}`}
-              onClick={() => setUserType('admin')}
+              onClick={() => {
+                setUserType('admin');
+                setErrorMessage(null);
+                setSuccessMessage(null);
+              }}
             >
               Admin
             </button>
@@ -137,31 +208,42 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <div className="input-wrapper" style={{width: '365px'}}>
+                <label htmlFor="email" className="input-label">Email Address</label>
                 <input
                   id="email"
                   type="email"
                   className="input-field"
                   placeholder="your.email@example.com" 
-                  style={{marginTop: '20px'}}
+                  style={{marginTop: '5px'}}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errorMessage) setErrorMessage(null);
+                  }}
                   required
                   autoComplete="email"
+                  disabled={isLoading}
                 />
               </div>
             </div>
             
             <div className="input-group">
               <div className="input-wrapper">
+                <label htmlFor="password" className="input-label">Password</label>
                 <input
                   id="password"
                   type="password"
                   className="input-field"
-                  placeholder="Password"
+                  placeholder="Enter your password"
+                  style={{marginTop: '5px'}}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (errorMessage) setErrorMessage(null);
+                  }}
                   required
                   autoComplete="current-password"
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -174,6 +256,7 @@ const Login = () => {
                   className="checkbox-input"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
+                  disabled={isLoading}
                 />
                 <label htmlFor="remember" className="checkbox-label">
                   <div className="checkbox-custom">
@@ -182,28 +265,46 @@ const Login = () => {
                   Remember me
                 </label>
               </div>
-              <a href="#" className="forgot-password" onClick={handleForgotPassword}>Forgot Password?</a>
+              <a href="#" className="forgot-password" onClick={handleForgotPassword}>
+                Forgot Password?
+              </a>
             </div>
 
             <button 
               type="submit" 
               className="login-button" 
-              disabled={isLoading} 
-              style={{marginTop: '30px',width: '500px'}}
+              disabled={isLoading || !email.trim() || !password.trim()} 
+              style={{marginTop: '30px',width: '365px'}}
             >
               {isLoading ? 'Signing in...' : 'Log in'}
             </button>
           </form>
           
           <div className="signup-link">
-            <span className="signup-text">Don't have account yet?</span>
+            <span className="signup-text">Don't have an account yet?</span>
             <button 
               type="button" 
               className="signup-link-text signup-link-button"
-              onClick={() => navigate('/signup')}
+              onClick={handleSignUpRedirect}
+              disabled={isLoading}
             >
               Sign up
             </button>
+          </div>
+
+          {/* Authentication Notice */}
+          <div style={{
+            marginTop: '20px',
+            padding: '12px',
+            backgroundColor: '#E3F2FD',
+            border: '1px solid #2196F3',
+            borderRadius: '8px',
+            fontSize: '12px',
+            color: '#1565C0',
+            textAlign: 'center'
+          }}>
+            <strong>Note:</strong> You must create an account first using the Sign Up page before you can log in.
+            {userType === 'admin' && ' Admin accounts require special registration.'}
           </div>
         </div>
       </div>
