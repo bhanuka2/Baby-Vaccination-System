@@ -184,15 +184,15 @@ const PD2: React.FC = () => {
 
   return (
     <>
-      <div className="form-container">
-        <div className="form-wrapper">
-          <div className="form-card">
+      <div className="form-container" >
+        <div className="form-wrapper " >
+          <div className="form-card" style={{width:"1000px"}}>
             {/* Header Section */}
             <div className="form-header">
-              <h1 className="form-title" style={{textAlign:"center",width:"1200px"}}>
+              <h1 className="form-title" style={{textAlign:"center",width:"1000px"}}>
                 Register New Baby
               </h1>
-              <p className="form-subtitle" style={{textAlign:"center",width:"1200px"}}>
+              <p className="form-subtitle" style={{textAlign:"center",width:"1000px"}}>
                 Add your baby's information to start tracking their health and development
               </p>
             </div>

@@ -20,7 +20,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white mt-auto">
+    <footer className="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white mt-auto" >
       {/* Main Footer Content */}
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
